@@ -1,0 +1,10 @@
+Nombre de mots pour les descripteurs:
+2
+Nombre de bits dans la quantification:
+2
+Chemin d'accès pour les fichiers texte:
+../Textes/
+Chemin d'accès pour les fichiers images noir et blanc:
+/Samples
+Chemin d'accès pour les fichiers images couleurs:
+/Samples/Images/Couleurs*

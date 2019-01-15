@@ -37,59 +37,10 @@ void menu()
     case 1 : 
       menu_user();
       break;
-    /*
-    do
-    {
-      printf("Que voulez-vous comparer ? (1) textes, (2)images\n ");
-      type_fichier = test_int();
-      //scanf("%d", &type_fichier);
-
-    }while( type_fichier != 1 && type_fichier != 2);
-
-    switch (type_fichier)
-    {
-      case 1 : printf("Vous avez choisi les textes\n");
-      do
-      {
-        printf("Que voulez-vous faire ? (1) Recherche mots-clé, (2) Comparaison \n");
-        action = test_int();
-
-      }while(action != 1 && action != 2);
-      if(action == 1){
-        Recherche_par_mot_cle();
-      }else if(action == 2){
-        ChoixDuFichier();
-      }
-      break;
-
-      case 2 : printf("Vous avez choisi les images. \n");
-      printf("Vous entrez donc en mode comparaison\n");
-
-
-      break;
-
-      default :
-      break;
-    }
-
-    break;*/
 
     case 2 : printf("Vous avez choisi le mode administrateur\n");
       menu_admin();
-    /*
-    param_index_texte();
-    param_index_image();
-    menu_index();
-    menu_chemins();
-    system("cat Param/param_indexation.txt");
-    param_recherche_texte();
-    system("cat Param/param_recherche.txt");
-    param_compar_texte();
-    menu_comparaison();
-    system("cat Param/param_comparaison.txt");
-    */
-    //menu_index();
-    //system("/Bureau/LOGICIEL_V1/Mode_administrateur/");
+
     break;
 
     default :
@@ -101,16 +52,14 @@ void menu()
 void main()
 {
 
-  char *CHEMIN = malloc(1000*sizeof(char));
-  FILE * ptr_Chemin;
+ // char *CHEMIN = malloc(1000*sizeof(char));
+  //FILE * ptr_Chemin;
   IndexationComplet();
-  ptr_Chemin = fopen("../APPLICATION/FILES/CHEMIN","r");
+  /*ptr_Chemin = fopen("../APPLICATION/FILES/CHEMIN","r");
   if(ptr_Chemin != NULL){
     fscanf(ptr_Chemin,"%s",CHEMIN);
   }else fprintf(stderr, "Erreur pointeur chemin\n");
-
-  //IndexationComplet("../Textes/");
-  //IndexationAutomatique("../Textes/");
+*/
   menu();
   //system("rm *.temp");
 }

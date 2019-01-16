@@ -21,17 +21,17 @@ int test_pourcentage(){      // cas où on souhaite un entier ou un float
 //VISUALISER LES DESCRIPTEURS
 //Pour les descipteurs de texte
 void affiche_descripteur_texte(){
-  system("gedit FILES/Descripteur &");
+  system("cat ./FILES/Descripteur");
 }
 
 //Pour les descripteurs image noir et blanc
 void affiche_descripteur_image_NB(){
-  system("gedit FILES/DescripteurImageNB &");
+  system("cat ./FILES/DescripteurImageNB &");
 }
 
 //Pour les descipteurs image couleur
 void affiche_descripteur_image_coul(){
-  system("gedit FILES/DescripteurImageRGB &");
+  system("cat ./FILES/DescripteurImageRGB &");
 }
 //ATTENTION A LA LOCALISATION DES DESCRIPTEURS IMAGES
 
@@ -44,12 +44,30 @@ void menu_descripteur(){
   switch(n){
     case 1 :
       affiche_descripteur_texte(); //Ce choix permet de visualiser les descripteurs texte
+      int choix;
+      printf("\nVoulez-vous faire autre chose?\n1-Retour au menu des descripteurs\n2-Quitter le programme\n");
+      scanf("%d&", &choix);
+      if(choix == 1){
+      	menu_descripteur();
+      }
       break;
     case 2 :
-      affiche_descripteur_image_NB(); //Ce choix permet de visualiser les descripeurs d'image noir et blanc
+      affiche_descripteur_image_NB(); //Ce choix permet de visualiser les descripteurs d'image noir et blanc
+      int choix;
+      printf("\nVoulez-vous faire autre chose?\n1-Retour au menu des descripteurs\n2-Quitter le programme\n");
+      scanf("%d&", &choix);
+      if(choix == 1){
+      	menu_descripteur();
+      }
       break;
     case 3 :
       param_compar_img_coul(); //Ce choix permet de visualiser les descipteurs d'image couleur
+      int choix;
+      printf("\nVoulez-vous faire autre chose?\n1-Retour au menu des descripteurs\n2-Quitter le programme\n");
+      scanf("%d&", &choix);
+      if(choix == 1){
+      	menu_descripteur();
+      }
       break;
     case 4 :
       menu_admin();
@@ -377,5 +395,5 @@ void menu_admin(){
       printf("Erreur: Le nombre entré n'est pas conforme.\n");
       menu_admin();
   }
-  system("clear");
+  //system("clear");
 }

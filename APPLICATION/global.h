@@ -23,5 +23,6 @@ int buffer;
 void vider_buffer();
 int compter_mots(char* chemin_fic, char* fic_a_compter);
 void Ouverture(char* chemin_fic, char* fic_a_ouvrir);
+void init_chemain3();
 
 #endif

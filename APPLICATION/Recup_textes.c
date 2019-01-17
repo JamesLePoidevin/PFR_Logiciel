@@ -1,6 +1,6 @@
 #include "Recup_textes.h"
 
-char CHEMIN3[1000] = "~/Documents/PFR/Textes/"; //Chemin d'accès aux textes à ouvrir.
+//char CHEMIN3[1000] = "~/Documents/PFR/Textes/"; //Chemin d'accès aux textes à ouvrir.
 
 
 //récupère la liste des descripteurs correspondants au mot choisi.
@@ -248,7 +248,8 @@ void Recup_textes()
 
     fclose(ptr_fic);
 
-    strcpy(CHEMIN3,lirechemin());
+
+    //strcpy(CHEMIN3,lirechemin());
 
     Ouverture(CHEMIN3,titre);
 
@@ -291,7 +292,7 @@ void Recup_textes()
 
             fclose(ptr_fic);
 
-            strcpy(CHEMIN3,lirechemin());
+            //strcpy(CHEMIN3,lirechemin());
             Ouverture(CHEMIN3,titre);
           }
         }

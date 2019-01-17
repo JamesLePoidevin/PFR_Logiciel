@@ -44,28 +44,31 @@ void menu_descripteur(){
   switch(n){
     case 1 :
       affiche_descripteur_texte(); //Ce choix permet de visualiser les descripteurs texte
-      int choix;
+      int choix1;
+      choix1=test_int();
       printf("\nVoulez-vous faire autre chose?\n1-Retour au menu des descripteurs\n2-Quitter le programme\n");
-      scanf("%d&", &choix);
-      if(choix == 1){
+      scanf("%d&", &choix1);
+      if(choix1 == 1){
       	menu_descripteur();
       }
       break;
     case 2 :
       affiche_descripteur_image_NB(); //Ce choix permet de visualiser les descripteurs d'image noir et blanc
-      int choix;
+      int choix2;
+      choix2=test_int();
       printf("\nVoulez-vous faire autre chose?\n1-Retour au menu des descripteurs\n2-Quitter le programme\n");
-      scanf("%d&", &choix);
-      if(choix == 1){
+      scanf("%d&", &choix2);
+      if(choix2 == 1){
       	menu_descripteur();
       }
       break;
     case 3 :
       param_compar_img_coul(); //Ce choix permet de visualiser les descipteurs d'image couleur
-      int choix;
+      int choix3;
+      choix3=test_int();
       printf("\nVoulez-vous faire autre chose?\n1-Retour au menu des descripteurs\n2-Quitter le programme\n");
-      scanf("%d&", &choix);
-      if(choix == 1){
+      scanf("%d&", &choix3);
+      if(choix3 == 1){
       	menu_descripteur();
       }
       break;

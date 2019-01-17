@@ -12,6 +12,10 @@ void vider_buffer()
   }
 }
 
+void init_chemain3(){
+  strcpy(CHEMIN3,lirechemin());
+}
+
 int compter_mots(char* chemin_fic, char* fic_a_compter)
 {
   strcpy(comptage, "wc -w ");

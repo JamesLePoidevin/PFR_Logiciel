@@ -28,13 +28,13 @@ void affiche_descripteur_texte(){
 //Pour les descripteurs image noir et blanc
 void affiche_descripteur_image_NB(){
   system("clear");
-  system("cat ./FILES/DescripteurImageNB &");
+  system("cat ./FILES/DescripteurImageNB");
 }
 
 //Pour les descipteurs image couleur
 void affiche_descripteur_image_coul(){
   system("clear");
-  system("cat ./FILES/DescripteurImageRGB &");
+  system("cat ./FILES/DescripteurImageRGB");
 }
 //ATTENTION A LA LOCALISATION DES DESCRIPTEURS IMAGES
 

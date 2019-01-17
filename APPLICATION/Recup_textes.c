@@ -203,11 +203,14 @@ void afficher_liste_textes()
 //La fonction qui permet de rechercher tous les textes correspondants à la recherche de l'utilisateur.
 void Recup_textes()
 {
+  for(;STOP==0;)
+  {
     z = 0;
+    int x = 0;
+    int seuil_occ = 2;
     int num_texte;
     int nouveau_texte;
     int nb_descripteurs_variable;
-    nb_occ_min = 5;
 
     Recup_descripteurs();
     nb_descripteurs = compter_mots(CHEMIN,"descripteurs_correspondants.temp");
@@ -219,17 +222,12 @@ void Recup_textes()
     {
       Isoler_descripteur(liste_descripteurs[i]);
       Occurences_par_descripteurs(mot_choisi);
-      int x = Recup_occurences(i);
-
-      printf("%d ",x);
-
-      if(x < nb_occ_min)
+      x = Recup_occurences(i);
+      if(x<seuil_occ && nb_descripteurs_variable > 1)
       {
-        nb_descripteurs_variable--;
+        nb_descripteurs_variable --;
       }
     }
-
-    printf("%d",nb_descripteurs_variable);
 
     for(i=0;i < nb_descripteurs_variable;i++)
     {
@@ -248,10 +246,7 @@ void Recup_textes()
 
     fclose(ptr_fic);
 
-
-    //strcpy(CHEMIN3,lirechemin());
-
-    Ouverture(CHEMIN3,titre);
+    Ouverture(CHEMIN4,titre);
 
     if(nb_descripteurs_variable > 1)
     {
@@ -272,7 +267,7 @@ void Recup_textes()
 
         if(nouveau_texte != 0)
         {
-          if(nouveau_texte <0 || nouveau_texte > nb_descripteurs)
+          if(nouveau_texte <0 || nouveau_texte > nb_descripteurs_variable)
           {
             printf("Numéro inconnu !! \n\n");
           }
@@ -292,10 +287,11 @@ void Recup_textes()
 
             fclose(ptr_fic);
 
-            //strcpy(CHEMIN3,lirechemin());
-            Ouverture(CHEMIN3,titre);
+            Ouverture(CHEMIN4,titre);
           }
         }
       }while(nouveau_texte != 0);
     }
+    STOP = 64;
+  }
 }

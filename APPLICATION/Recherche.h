@@ -3,8 +3,6 @@
 
 #include "traiter_mot_cle.h"
 
-//#include "comparaison.h"
-
 void Recherche_par_mot_cle();
 
 #endif

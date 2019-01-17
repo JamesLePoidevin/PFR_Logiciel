@@ -21,102 +21,97 @@ int test_pourcentage(){      // cas où on souhaite un entier ou un float
 //VISUALISER LES DESCRIPTEURS
 //Pour les descipteurs de texte
 void affiche_descripteur_texte(){
+  system("clear");
   system("cat ./FILES/Descripteur");
 }
 
 //Pour les descripteurs image noir et blanc
 void affiche_descripteur_image_NB(){
+  system("clear");
   system("cat ./FILES/DescripteurImageNB &");
 }
 
 //Pour les descipteurs image couleur
 void affiche_descripteur_image_coul(){
+  system("clear");
   system("cat ./FILES/DescripteurImageRGB &");
 }
 //ATTENTION A LA LOCALISATION DES DESCRIPTEURS IMAGES
 
 //MENU VISUALISER DESCRIPTEURS
 void menu_descripteur(){
-  system("clear");
-  printf("Menu d'affichage des descripteurs:\n1-Visualiser les descripteurs de texte\n2-Visualiser les descripteurs d'image noir et blanc\n3-Visualiser les descripteurs d'image couleur\n4-Retour au Mode administrateur\n5-Quitter le programme\n");
+  //system("clear");
+  printf("\nMenu d'affichage des descripteurs:\n1-Visualiser les descripteurs de texte\n2-Visualiser les descripteurs d'image noir et blanc\n3-Visualiser les descripteurs d'image couleur\n4-Retour au Mode administrateur\n5-Quitter le programme\n");
   int n;
   n = test_int();
   switch(n){
     case 1 :
+      system("clear");
       affiche_descripteur_texte(); //Ce choix permet de visualiser les descripteurs texte
-      int choix1;
-      choix1=test_int();
-      printf("\nVoulez-vous faire autre chose?\n1-Retour au menu des descripteurs\n2-Quitter le programme\n");
-      scanf("%d&", &choix1);
-      if(choix1 == 1){
-      	menu_descripteur();
-      }
+      menu_descripteur();
       break;
     case 2 :
+      system("clear");
       affiche_descripteur_image_NB(); //Ce choix permet de visualiser les descripteurs d'image noir et blanc
-      int choix2;
-      choix2=test_int();
-      printf("\nVoulez-vous faire autre chose?\n1-Retour au menu des descripteurs\n2-Quitter le programme\n");
-      scanf("%d&", &choix2);
-      if(choix2 == 1){
-      	menu_descripteur();
-      }
+      menu_descripteur();
       break;
     case 3 :
-      param_compar_img_coul(); //Ce choix permet de visualiser les descipteurs d'image couleur
-      int choix3;
-      choix3=test_int();
-      printf("\nVoulez-vous faire autre chose?\n1-Retour au menu des descripteurs\n2-Quitter le programme\n");
-      scanf("%d&", &choix3);
-      if(choix3 == 1){
-      	menu_descripteur();
-      }
+      system("clear");
+      affiche_descripteur_image_coul(); //Ce choix permet de visualiser les descipteurs d'image couleur
+      menu_descripteur();
       break;
     case 4 :
+      system("clear"); //Ce choix permet de retourner au menu du mode administrateur
       menu_admin();
       break;
     case 5 :
+      return;
       break;
     default :
       system("clear");
       printf("Erreur: Le nombre entré n'est pas conforme.\n");
-      menu_comparaison();
+      menu_descripteur();
     }
 }
 
 
 //PARAMETRAGE RECHERCHE
 void param_recherche_texte(){
-  system("clear");
-  printf("1-Changer les paramètres de recherche\n2-Retour au Mode administrateur\n");
-    int n;
-    n = test_int();
-    if (n==1){
-      char nbr_mots_txt_char[50];
-      int nbr_mots_txt;
-      do {
-        printf("Combien de fois minimum faut-il qu'il y ait le mot dans le texte pour que le logiciel affiche le descripteur?\n");
-        scanf("%d", &nbr_mots_txt);
-        sprintf(nbr_mots_txt_char,"%d",nbr_mots_txt);
-        if (nbr_mots_txt<1){
-          printf("Erreur: Le nombre entré n'est pas conforme.\n");
-        }
-      }while(nbr_mots_txt<1);
-      //system("sed -i '2s/.*/%nbr_mots%/'  param_indexation.txt"); //Suppression de la deuxième ligne du fichier param_recherche.txt et remplacement par le nouveau nbr_mot_txt
-      char commande[1024];
-      strcpy(commande,"sed -i '2s/.*/"); //Suppression de la deuxième ligne du fichier param_recherche.txt
-      strcat(commande, nbr_mots_txt_char);
-      strcat(commande,"/'  Param/param_recherche.txt"); //Remplacement de la deuxième ligne du fichier param_recherche.txt, avec le nouveau nombre
-      system(commande);
-      //ATTENTION A L'EMPLACEMENT DE param_recherche.txt
-    }
-    else if(n==2){
-      menu_admin();
-    }
-    else{
+  //system("clear");
+  printf("\n1-Changer les paramètres de recherche\n2-Retour au Mode administrateur\n");
+  int n;
+  n = test_int();
+  if (n==1){
+    char nbr_mots_txt_char[50];
+    int nbr_mots_txt;
+    do {
+      printf("Combien de fois minimum faut-il qu'il y ait le mot dans le texte pour que le logiciel affiche le descripteur?\n");
+      nbr_mots_txt = test_int();
+      sprintf(nbr_mots_txt_char,"%d",nbr_mots_txt);
+      if (nbr_mots_txt<1){
+        system("clear");
         printf("Erreur: Le nombre entré n'est pas conforme.\n");
-        param_recherche_texte();
-    }
+      }
+    }while(nbr_mots_txt<1);
+    //system("sed -i '2s/.*/%nbr_mots%/'  param_indexation.txt"); //Suppression de la deuxième ligne du fichier param_recherche.txt et remplacement par le nouveau nbr_mot_txt
+    char commande[1024];
+    strcpy(commande,"sed -i '2s/.*/"); //Suppression de la deuxième ligne du fichier param_recherche.txt
+    strcat(commande, nbr_mots_txt_char);
+    strcat(commande,"/'  Param/param_recherche.txt"); //Remplacement de la deuxième ligne du fichier param_recherche.txt, avec le nouveau nombre
+    system(commande);
+    system("clear");
+    printf("\nLes paramètres de recherche ont été modifiés avec succès.\n");
+    param_recherche_texte();
+    //ATTENTION A L'EMPLACEMENT DE param_recherche.txt
+  }
+  else if(n==2){
+    system("clear");
+    menu_admin(); //Ce choix permet de revenir au mode administrateur
+  }
+  else{
+      printf("Erreur: Le nombre entré n'est pas conforme.\n");
+      param_recherche_texte();
+  }
 }
 
 
@@ -189,23 +184,33 @@ void param_compar_img_coul(){
 
 //Menu pour comparaison
 void menu_comparaison(){
-  printf("Menu modification des seuils de similarité pour la comparaison:\n1-Seuil pour les descripteurs texte\n2-Seuil pour les descripteurs image noir et blanc\n3-Seuil pour les descripteurs image couleur\n4-Retour au Mode administrateur\n5-Quitter le programme\n");
+  printf("\nMenu modification des seuils de similarité pour la comparaison:\n1-Seuil pour les descripteurs texte\n2-Seuil pour les descripteurs image noir et blanc\n3-Seuil pour les descripteurs image couleur\n4-Retour au Mode administrateur\n5-Quitter le programme\n");
   int n;
   n = test_int();
   switch(n){
     case 1 :
       param_compar_texte(); //Ce choix permet de changer le chemin des fichiers texte
+      system("clear");
+      printf("\nLes paramètres de comparaison ont été modifiés avec succès.\n");
+      menu_comparaison();
       break;
     case 2 :
       param_compar_img_nb(); //Ce choix permet de changer le chemin des fichiers image noir et blanc
+      system("clear");
+      printf("\nLes paramètres de comparaison ont été modifiés avec succès.\n");
+      menu_comparaison();
       break;
     case 3 :
       param_compar_img_coul(); //Ce choix permet de changer le chemin des fichiers image couleur
+      system("clear");
+      printf("\nLes paramètres de comparaison ont été modifiés avec succès.\n");
+      menu_comparaison();
       break;
     case 4 :
-      menu_admin();
+      menu_admin();  //Ce choix permet de retourner au menu du mode administration
       break;
     case 5 :
+      return;
       break;
     default :
       system("clear");
@@ -213,7 +218,7 @@ void menu_comparaison(){
       menu_comparaison();
     }
     system("clear");
-    printf("Le fichier a été modifié avec succès.\n");
+    //  printf("Le fichier a été modifié avec succès.\n");
 }
 
 
@@ -270,13 +275,20 @@ void menu_index(){
   switch(n){
     case 1 :
       param_index_texte(); //Ce choix permet de changer les paramètres d'indexation du texte
+      system("clear");
+      printf("\nLes paramètres d'indexation ont été modifiés avec succès.\n");
+      menu_index();
       break;
     case 2 :
       param_index_image(); //Ce choix permet de changer les paramètres d'indexation d'image
+      system("clear");
+      printf("\nLes paramètres d'indexation ont été modifiés avec succès.\n");
+      menu_index();
       break;
     case 3 :
       menu_admin();
     case 4 :
+      return;
       break;
     default :
       system("clear");
@@ -342,17 +354,27 @@ void menu_chemins(){
   switch(n){
     case 1 :
       chemin_texte(); //Ce choix permet de changer le chemin des fichiers texte
+      system("clear");
+      printf("\nLe chemin a été modifié avec succès.\n");
+      menu_chemins();
       break;
     case 2 :
       chemin_image_nb(); //Ce choix permet de changer le chemin des fichiers image noir et blanc
+      system("clear");
+      printf("\nLe chemin a été modifié avec succès.\n");
+      menu_chemins();
       break;
     case 3 :
       chemin_image_coul(); //Ce choix permet de changer le chemin des fichiers image couleur
+      system("clear");
+      printf("\nLe chemin a été modifié avec succès.\n");
+      menu_chemins();
       break;
     case 4 :
-      menu_admin();
+      menu_admin();  //Ce choix permet de retourner au mode administrateur
       break;
     case 5 :
+      return;
       break;
     default :
       system("clear");
@@ -393,6 +415,7 @@ void menu_admin(){
       menu_user();
       break;
     case 7 :
+      return;
       break;
     default :
       printf("Erreur: Le nombre entré n'est pas conforme.\n");

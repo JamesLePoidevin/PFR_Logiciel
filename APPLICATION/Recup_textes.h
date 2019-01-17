@@ -4,8 +4,6 @@
 
 #include "global.h"
 
-char CHEMIN3[1000];
-
 int i;
 int nb_occ_min;
 int* position;

@@ -4,11 +4,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "Comparaison.h"
-#include "Recup_textes.h"
+#include "comparaisonImage.h"
 
 char CHEMIN[1000];
 char CHEMIN2[1000];
+char CHEMIN3[1000];
+char CHEMIN4[1000];
+int STOP;
 
 char comptage[1000];
 char ouverture[1000];
@@ -23,6 +27,6 @@ int buffer;
 void vider_buffer();
 int compter_mots(char* chemin_fic, char* fic_a_compter);
 void Ouverture(char* chemin_fic, char* fic_a_ouvrir);
-void init_chemain3();
-
+void Initialisation();
+void init_chemin4();
 #endif

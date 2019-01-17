@@ -1,7 +1,7 @@
 #ifndef TRAITER_MOT_CLE_H_INCLUS     /*--  Inclusion conditionnelle --> si pas déjà inclus           */
 #define TRAITER_MOT_CLE_H_INCLUS    /*--  alors créer la constante symbolique TRAITER_MOT_CLE_H_INCLUS */
 
-#include "global.h"
+#include "Recup_textes.h"
 
 char mot_cle[50];
 

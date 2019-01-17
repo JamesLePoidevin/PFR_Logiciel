@@ -1,5 +1,5 @@
-Qwante : menu.o menuUser.o configuration.o Recherche.o Recup_textes.o traiter_mot_cle.o global.o Comparaison.o indexationAuto.o indexationComplet.o TriFichier.o LectureFichiers.o pile_statique.o element.o Descripteur.o CommandeSysteme.o Mot.o
-	gcc -o Qwante menu.o menuUser.o configuration.o Recherche.o Recup_textes.o traiter_mot_cle.o global.o Comparaison.o indexationAuto.o indexationComplet.o TriFichier.o LectureFichiers.o pile_statique.o element.o Descripteur.o CommandeSysteme.o Mot.o
+Qwante : menu.o menuUser.o configuration.o Recherche.o Recup_textes.o traiter_mot_cle.o global.o Comparaison.o indexationAuto.o indexationComplet.o TriFichier.o LectureFichiers.o pile_statique.o element.o Descripteur.o CommandeSysteme.o Mot.o comparaisonImage.o IndexationImage.o IndexationImageRGB.o elementRGB.o pile_statiqueRGB.o IndexationImageNB.o pile_statiqueNB.o elementNB.o
+	gcc -o Qwante menu.o menuUser.o configuration.o Recherche.o Recup_textes.o traiter_mot_cle.o global.o Comparaison.o indexationAuto.o indexationComplet.o TriFichier.o LectureFichiers.o pile_statique.o element.o Descripteur.o CommandeSysteme.o Mot.o comparaisonImage.o IndexationImage.o IndexationImageRGB.o elementRGB.o pile_statiqueRGB.o IndexationImageNB.o pile_statiqueNB.o elementNB.o
 
 menu.o : menu.c
 	gcc -c menu.c
@@ -52,6 +52,38 @@ traiter_mot_cle.o : traiter_mot_cle.c traiter_mot_cle.h
 global.o : global.c global.h
 	gcc -c global.c
 
+IndexationImage:comparaisonImage.o IndexationImage.o IndexationImageRGB.o elementRGB.o pile_statiqueRGB.o IndexationImageNB.o pile_statiqueNB.o elementNB.o
+	gcc -o IndexationImage.out comparaisonImage.o IndexationImage.o IndexationImageRGB.o elementRGB.o pile_statiqueRGB.o IndexationImageNB.o pile_statiqueNB.o elementNB.o
+
+comparaisonImage.o:comparaisonImage.c
+	gcc -c comparaisonImage.c
+
+IndexationImage.o:IndexationImage.c IndexationImage.h
+	gcc -c IndexationImage.c
+	
+IndexationNB: IndexationImageNB.o pile_statiqueNB.o elementNB.o elementNB.h
+	gcc -o indexationNB.out IndexationImageNB.o pile_statiqueNB.o elementNB.o
+
+IndexationImageNB.o: IndexationImageNB.c IndexationImageNB.h
+	gcc -c IndexationImageNB.c
+
+pile_statiqueNB.o: pile_statiqueNB.c pile_statiqueNB.h 
+	gcc -c pile_statiqueNB.c
+
+elementNB.o: elementNB.c elementNB.h descripteurNB.h
+	gcc -c elementNB.c
+
+IndexationRGB : IndexationImageRGB.o elementRGB.o pile_statiqueRGB.o
+	gcc -o indexationRGB.out IndexationImageRGB.o elementRGB.o pile_statiqueRGB.o
+
+IndexationRGB.o : IndexationImageRGB.c IndexationImageRGB.h
+	gcc -c IndexationRGB.c
+
+pile_statiqueRGB.o :pile_statiqueRGB.c pile_statiqueRGB.h
+	gcc -c pile_statiqueRGB.c
+
+elementRGB.o: elementRGB.c elementRGB.h descripteurRGB.h
+	gcc -c elementRGB.c
 
 clean :
 	rm -rf *.o

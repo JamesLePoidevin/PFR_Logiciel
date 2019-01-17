@@ -1,7 +1,8 @@
 #include "global.h"
 
-char CHEMIN[1000] = "../APPLICATION/";
-char CHEMIN2[1000] = "../APPLICATION/FILES/";
+char CHEMIN[1000] = "./"; //CHemin source
+char CHEMIN2[1000] = "./FILES/"; //Chemin vers MotCles, Descripteur ...
+char CHEMIN3[1000] = "./Param/"; //Chemin vers MotCles, Descripteur ...
 
 void vider_buffer()
 {
@@ -12,8 +13,8 @@ void vider_buffer()
   }
 }
 
-void init_chemain3(){
-  strcpy(CHEMIN3,lirechemin());
+void init_chemin4(){
+  strcpy(CHEMIN4,lirechemin());
 }
 
 int compter_mots(char* chemin_fic, char* fic_a_compter)
@@ -27,7 +28,10 @@ int compter_mots(char* chemin_fic, char* fic_a_compter)
   system(comptage);
 
   ptr_fic = fopen("total.temp","r");
-  fscanf(ptr_fic,"%d",&nb_mots);
+  if(ptr_fic != NULL)
+  {
+    fscanf(ptr_fic,"%d",&nb_mots);
+  }
   fclose(ptr_fic);
 
   return nb_mots;
@@ -37,9 +41,8 @@ void Ouverture(char* chemin_fic, char* fic_a_ouvrir)
 {
   strcpy(ouverture,"cat ");
   strcat(ouverture,chemin_fic);
-  printf("%s\n",fic_a_ouvrir );
   strcat(ouverture,fic_a_ouvrir);
-  //strcat(ouverture," &");
-
   system(ouverture);
+
+  printf("\n\n");
 }

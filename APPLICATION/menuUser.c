@@ -32,9 +32,10 @@ void menu_user(){
         break;
 
       case 2 : printf("Vous avez choisi les images. \n");
-        printf("Vous entrez donc en mode comparaison\n");
-
-
+       
+        Indexation();
+        int choix = AffichageFichier();
+        compair(choix);
         break;
 
       default :

@@ -195,9 +195,11 @@ int enleverBalise2(FILE * ptr_fic,type_mot tab[]){
 
     
     
-    
+    if(strlen(mot)>3){
     /*met le mot dans tableau tab et verifier si le mot est deja dans le tableau*/
-    indiceTabMot = misDeMotDansTableau(mot,indiceTabMot,tab); 
+    indiceTabMot = misDeMotDansTableau(mot,indiceTabMot,tab);
+
+    } 
     
   }
   return indiceTabMot;
@@ -269,14 +271,25 @@ type_des FaireDescripteur(FILE * ptr_fic,int reference){
   int nbmot;
    type_des descripteur = init_des();
    type_mot tab[5000];
+
+    for (int i = 0; i < 5000; i++)
+    {
+      tab[i] = init_mot();
+    }
+
       if(ptr_fic != NULL){
         
         /*nbmot nombre de mot dans tab sans les balise*/
         nbmot = enleverBalise2(ptr_fic,tab);
+
       }else fprintf(stderr, "ERREUR pointeur Fichier a lire\n");
       fclose(ptr_fic);
       
       type_mot *tab2 = malloc(nbmot * sizeof(type_mot));
+      for (int i = 0; i < nbmot; i++)
+      {
+        tab2[i] = init_mot();
+      }
       
       /*tri le tableau dans l'ordre décroissant en fonction de l'occurence */
       Trier_tab_mot(tab,tab2,nbmot);
@@ -338,54 +351,3 @@ free(nomdufichier);
 free(adresse);
 }
 
-
-/*
-void IndexationComplet(char* CHEMIN){
-
-  char NomFichier[1024];
-  char adresse[1000];
-
-  int reference;
-
-  FILE * ptr_test;
-
-  PILE p = init_PILE();
-  int indice = NomDesFichiers(CHEMIN,"NomDesFichiers");
-
-  ptr_test =fopen("../APPLICATION/FILES/NomDesFichiers", "r");
-   if(ptr_test != NULL){
-     while (fscanf(ptr_test, "%s",NomFichier)==1  ){
-      fscanf(ptr_test,"%d",&reference);
-       strcpy(adresse,CHEMIN);
-       strcat(adresse,NomFichier);
-       type_des A = init_des();
-       
-       A = FaireDescripteur(adresse,reference);
-       p=emPILE(p, A);
-     }
-   }
-   fclose(ptr_test);
-
-   FILE *ptr_FichierDes;
-   FILE *ptrFichierMC;
-   ptrFichierMC=fopen("../APPLICATION/FILES/MotsCles","w");
-   ptr_FichierDes =fopen("../APPLICATION/FILES/Descripteur", "w");
-   if(ptrFichierMC != NULL ){
-   while(PILE_estVide(p) != 1){
-     type_des A = init_des();
-     p = dePILE(p,&A);
-     fprintf(ptr_FichierDes,"%d\n",A.ref );
-     for (size_t i = 0; i < recuperer_Valuer_Descripteur(); i++) {
-      fprintf(ptr_FichierDes, "%s %d\n",A.tab[i].mot,A.tab[i].occurence);
-      printf("%s\n", A.tab[i].mot);
-      fprintf(ptrFichierMC, "%s %d\n",A.tab[i].mot,A.ref);
-     }
-   }
- }else fprintf(stderr, "Erreur fichier MotsCles\n");
-   fclose(ptr_FichierDes);
-   fclose(ptrFichierMC);
-
-   programme("../APPLICATION/FILES/MotsCles");
-
-}
-*/

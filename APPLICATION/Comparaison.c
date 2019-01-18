@@ -74,7 +74,7 @@ if(ptr_Descripteur!=NULL){	//si le fichier c'est bien ouvert
 		listeDescripteur[indice1].ref =Auxiliaire.ref;
 		for (int i = 0; i < recuperer_Valuer_Descripteur(); i++)
 		{	
-			fscanf(ptr_Descripteur,"%s %d",Auxiliaire.tab[i].mot,&Auxiliaire.tab[i].occurence);
+			fscanf(ptr_Descripteur,"%1023s%d",Auxiliaire.tab[i].mot,&Auxiliaire.tab[i].occurence);
 		}
 		
 		
@@ -93,6 +93,7 @@ type_des comp = init_des();
 comp = listeDescripteur[choix+1];
 
 //calcule
+//A ranger
 for (int i = 0; i < indice; i++){
 	for (int j = 0; j < recuperer_Valuer_Descripteur(); j++){
 		for (int k = 0; k < recuperer_Valuer_Descripteur(); k++){

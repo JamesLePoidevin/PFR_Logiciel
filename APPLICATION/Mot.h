@@ -5,11 +5,12 @@
 
 typedef struct type_mot
 {
-	char mot[1024];
+	char *mot;
 	int occurence;
 }type_mot;
 
 
+type_mot init_mot();
 //setter
 type_mot setMot(type_mot A,char *mot);
 type_mot setOccurence(type_mot A,int occurence);

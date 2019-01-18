@@ -1,5 +1,9 @@
 #include "Mot.h"
 
+type_mot init_mot(){
+	type_mot A;
+	A.mot = malloc(1024*sizeof(char));
+}
 
 type_mot setMot(type_mot A,char *mot){
 	strcpy(A.mot,mot);

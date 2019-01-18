@@ -107,7 +107,7 @@ void Indexation(){
   		pNB = dePILENB(pNB,&NB);
   		fprintf(ptr_ImageNB, "%d\n",NB.ref);
   		for (int i = 0; i < 2; i++){
-  				fprintf(ptr_ImageNB,"%f \n",NB.tab[i]);
+  				fprintf(ptr_ImageNB,"%f\n",NB.tab[i]);
   		}
   	}
   }else fprintf(stderr, "ERREUR pointeur fichier DescripteurImageRGB\n");

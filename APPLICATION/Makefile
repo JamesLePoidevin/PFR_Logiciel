@@ -38,52 +38,52 @@ Mot.o: Mot.c Mot.h
 	gcc -c -g Mot.c
 
 configuration.o : configuration.c configuration.h
-	gcc -c configuration.c
+	gcc -c -g configuration.c
 
 Recherche.o : Recherche.c Recherche.h
-	gcc -c Recherche.c
+	gcc -c -g Recherche.c
 
 Recup_textes.o : Recup_textes.c Recup_textes.h
-	gcc -c Recup_textes.c
+	gcc -c -g Recup_textes.c
 
 traiter_mot_cle.o : traiter_mot_cle.c traiter_mot_cle.h
-	gcc -c traiter_mot_cle.c
+	gcc -c -g traiter_mot_cle.c
 
 global.o : global.c global.h
-	gcc -c global.c
+	gcc -c -g global.c
 
 IndexationImage:comparaisonImage.o IndexationImage.o IndexationImageRGB.o elementRGB.o pile_statiqueRGB.o IndexationImageNB.o pile_statiqueNB.o elementNB.o
 	gcc -o IndexationImage.out comparaisonImage.o IndexationImage.o IndexationImageRGB.o elementRGB.o pile_statiqueRGB.o IndexationImageNB.o pile_statiqueNB.o elementNB.o
 
 comparaisonImage.o:comparaisonImage.c
-	gcc -c comparaisonImage.c
+	gcc -c -g comparaisonImage.c
 
 IndexationImage.o:IndexationImage.c IndexationImage.h
-	gcc -c IndexationImage.c
+	gcc -c -g IndexationImage.c
 	
 IndexationNB: IndexationImageNB.o pile_statiqueNB.o elementNB.o elementNB.h
 	gcc -o indexationNB.out IndexationImageNB.o pile_statiqueNB.o elementNB.o
 
 IndexationImageNB.o: IndexationImageNB.c IndexationImageNB.h
-	gcc -c IndexationImageNB.c
+	gcc -c -g IndexationImageNB.c
 
 pile_statiqueNB.o: pile_statiqueNB.c pile_statiqueNB.h 
-	gcc -c pile_statiqueNB.c
+	gcc -c -g pile_statiqueNB.c
 
 elementNB.o: elementNB.c elementNB.h descripteurNB.h
-	gcc -c elementNB.c
+	gcc -c -g elementNB.c
 
 IndexationRGB : IndexationImageRGB.o elementRGB.o pile_statiqueRGB.o
-	gcc -o indexationRGB.out IndexationImageRGB.o elementRGB.o pile_statiqueRGB.o
+	gcc -o -g indexationRGB.out IndexationImageRGB.o elementRGB.o pile_statiqueRGB.o
 
 IndexationRGB.o : IndexationImageRGB.c IndexationImageRGB.h
-	gcc -c IndexationRGB.c
+	gcc -c -g IndexationRGB.c
 
 pile_statiqueRGB.o :pile_statiqueRGB.c pile_statiqueRGB.h
-	gcc -c pile_statiqueRGB.c
+	gcc -c -g pile_statiqueRGB.c
 
 elementRGB.o: elementRGB.c elementRGB.h descripteurRGB.h
-	gcc -c elementRGB.c
+	gcc -c -g elementRGB.c
 
 clean :
 	rm -rf *.o

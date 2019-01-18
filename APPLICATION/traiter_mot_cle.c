@@ -140,6 +140,7 @@ void Recherche_mot_exact()
   printf("Saisir un mot complet (q pour Quitter): ");
   scanf("%s",mot_cle);  
 
+  /**/
   strcpy(recherche, "grep -x -n -i ");
   strcat(recherche,mot_cle);
   strcat(recherche," ");
@@ -147,6 +148,7 @@ void Recherche_mot_exact()
   strcat(recherche,"MotsClesMinSansDescripteurs.temp | cut -f1 -d ':' > ");
   strcat(recherche, CHEMIN);
   strcat(recherche, "lignes.temp");
+
   system(recherche);
 
   nb_lignes = compter_mots(CHEMIN,"lignes.temp");
@@ -287,15 +289,20 @@ void Recherche()
           if(nb_mots > 1)
           {
             printf("Voici les choix possibles : \n");
+
             affichage_mots(CHEMIN,"mots_trouves_depart.temp");
+
             Recherche_mot_exact();
 
           }
           else if(nb_mots < 1)
           {
             printf("Mot inconnu : \n");
+
             printf("Voici votre precedente recherche : \n");
+            
             affichage_mots(CHEMIN,"mots_trouves_depart.temp");
+            /**/
             Recherche_mot_exact();
 
           }

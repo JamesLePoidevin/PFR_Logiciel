@@ -11,8 +11,8 @@ int AffichageFichier(){
 	ptr_NomDesFichiers =fopen("../APPLICATION/FILES/NomDesFichiersImage","r");
 	if(ptr_NomDesFichiers!=NULL){
 		while(!feof(ptr_NomDesFichiers)){
-			fscanf(ptr_NomDesFichiers,"%s %d",NomDesFichiers[indice],&des[indice]);
-		indice ++;	//indice égale au nombre de fichiers 
+			fscanf(ptr_NomDesFichiers,"%s%d",NomDesFichiers[indice],&des[indice]);
+			indice ++;	//indice égale au nombre de fichiers 
 	}
 }else fprintf(stderr, "ERREUR pointeur fichier NomDesFichiers\n" );
 //printf("%d\n",indice );
@@ -69,8 +69,8 @@ void compair(int choix){
 
 	ptr_NomDesFichiers =fopen("../APPLICATION/FILES/NomDesFichiersImage","r");
 	if(ptr_NomDesFichiers!=NULL){
-		while(!feof(ptr_NomDesFichiers)){
-			fscanf(ptr_NomDesFichiers,"%s %d",NomDesFichiers[indice],&des[indice]);
+		while(fscanf(ptr_NomDesFichiers,"%s",NomDesFichiers[indice])==1){
+			fscanf(ptr_NomDesFichiers,"%d",&des[indice]);
 		indice ++;	//indice égal au nombre de fichiers 
 	}
 }else fprintf(stderr, "ERREUR pointeur fichier NomDesFichiers\n" );

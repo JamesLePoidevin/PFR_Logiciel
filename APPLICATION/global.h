@@ -8,25 +8,17 @@
 #include "Comparaison.h"
 #include "comparaisonImage.h"
 
-char CHEMIN[1000];
-char CHEMIN2[1000];
-char CHEMIN3[1000];
-char CHEMIN4[1000];
-int STOP;
+char CHEMIN[1000]; //contient le chemin source du code
+char CHEMIN2[1000]; //contient le chemin vers les fichiers MotsCles, Descripteur ...
+char CHEMIN3[1000]; //contient le chemin vers les textes à ouvrir
 
-char comptage[1000];
-char ouverture[1000];
-char dossier[1000];
-char fichier[1000];
+int STOP; //une variable qui servira de condition pour quitter le programme
 
-char mot_choisi[50];
-FILE* ptr_fic;
-int nb_mots;
-int buffer;
+char mot_choisi[50]; //contiendra le mot que l'utilisateur choisit à la fin pour sa recherche
 
 void vider_buffer();
 int compter_mots(char* chemin_fic, char* fic_a_compter);
 void Ouverture(char* chemin_fic, char* fic_a_ouvrir);
-void Initialisation();
-void init_chemin4();
+void init_chemins();
+
 #endif

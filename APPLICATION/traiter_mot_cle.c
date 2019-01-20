@@ -115,7 +115,7 @@ void Compare_mots()
 
   else //Si aucun mot ne correspondait à la recherche, le fichier temporaire mots_trouves.temp est créé vide.
   {
-    strcpy(echo,"echo > ");
+    strcpy(echo,"echo ' '> ");
     strcat(echo,CHEMIN);
     strcat(echo,"mots_trouves.temp");
     system(echo);
@@ -226,11 +226,13 @@ void Recherche_mot_exact()
 
   fclose(ptr_fic);
 
-  nb_mots = compter_mots(CHEMIN,"lignes.temp"); //On compte le nombre de lignes total où se trouve le mot exact saisi.
-
-  if(nb_mots > 0) //Si le mot se trouve au moins une fois on utilise Compare_mots() pour ne le garder qu'une seule fois.
+  if(nb_lignes > 0) //Si le mot se trouve au moins une fois on utilise Compare_mots() pour ne l'afficher qu'une seule fois à l'utilisateur.
   {
     Compare_mots();
+  }
+  else //Sinon on met nb_mots à 0 (nombre de correspondance au mot saisi)
+  {
+    nb_mots = 0;
   }
 
   vider_buffer();//On vide le buffer pour éviter les saisies parasites.
@@ -302,6 +304,7 @@ void Recherche()
       if(nb_mots < 1) //Si il n'y a pas de mots correpondant à la saisie
       {
         printf("\nAucune correspondance.\n");
+        depart = 1;
       }
 
       else if(nb_mots == 1) //Si il y a une unique correspondance à la saisie.

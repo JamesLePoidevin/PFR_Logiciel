@@ -3,14 +3,14 @@
 
 #include "global.h"
 
-int liste_descripteurs[1000];//Contiendra la liste des descripteurs contenant le mot choisi par l'utilisateur.
-int occurrences[1000];//Contiendra la liste des occurrences par descripteur triée par ordre décroissant
-int tri_descripteurs[1000];//Contiendra la liste des descripteurs triés en fonction de leurs occurrences.
-char titre[1000];
+int* liste_descripteurs; //Contiendra la liste des descripteurs contenant le mot choisi par l'utilisateur.
+int* occurrences; //Contiendra la liste des occurrences par descripteur triée par ordre décroissant
+int* tri_descripteurs; //Contiendra la liste des descripteurs triés en fonction de leurs occurrences.
+//La taille des 3 tableaux ci-dessus sera allouée dynamiquement en fonction du nombe de descripteurs correspondants à la recherche.
 
 int nb_descripteurs;//Correspond au nombre de descripteurs contenant le mot choisi.
 
-int nb_titres; //nombre de titres déjà récupérés (On l'initialise à 0);
+int nb_titres; //nombre de titres déjà récupérés;
 
 void Recup_descripteurs();
 void Enregistrer_descripteurs();

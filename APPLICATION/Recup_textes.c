@@ -87,6 +87,8 @@ void Isoler_descripteur(int num)
     fscanf(ptr_fichierTEMP,"%d",&nb_termes); //On récupère le nombre de termes par descripteur.
     }else fprintf(stderr, "ERREUR pointeur file.temp\n");
 
+    fclose(ptr_fichierTEMP);//On ferme le fichier
+
     sprintf(num_ligne,"%d",ligne+nb_termes); //On enregistre la ligne de fin du descripteur.
     sprintf(taille_descripteur,"%d",nb_termes+1); //On enregistre la taille d'un descripteur.
 
@@ -136,20 +138,28 @@ int Recup_occurrences(int pos)
   {
     fscanf(ptr_fic,"%d",&occ); //On lit le nombre d'occurrences du mot choisi.
 
-    for(int i = pos; i >= 0 ; i--) //On part de la position du descripteur dans liste_descripteur et on redescend jusqu'au début pour mettre le plus gros nombre d'occurrences au début.
+    if(pos==0)//Si la on donne la position 0 il suffit d'enregistrer le descripteur et son nombre d'occurences à l'indice 0.
     {
-      if(occ > occurrences[i]) //Si le nombre d'occurrences est plus grand que le précédent on les échangent de place.
+      occurrences[pos] = occ;
+      tri_descripteurs[pos] = liste_descripteurs[pos];
+    }
+    else
+    {
+      for(int i = pos-1; i >= 0 ; i--) //On part de la position du dernier descripteur déjà enregistré et on redescend jusqu'au début pour mettre le plus gros nombre d'occurrences au début.
       {
-      occurrences[i+1] = occurrences[i];
-      occurrences[i] = occ;
-      tri_descripteurs[i+1] = tri_descripteurs[i]; //On tri le descripteur en même temps que son occurrence pour qu'il ai le même indice.
-      tri_descripteurs[i] = liste_descripteurs[pos];
-      }
-      else //Sinon on laisse l'occurrence et son descripteur à l'indice où ils sont et on sort de la boucle.
-      {
-      occurrences[i+1] = occ;
-      tri_descripteurs[i+1] = liste_descripteurs[pos];
-      break;
+        if(occ > occurrences[i]) //Si le nombre d'occurrences est plus grand que le précédent on les échangent de place jusqu'à avoir placé le descripteur que l'on est entain de traiter.
+        {
+        occurrences[i+1] = occurrences[i];
+        occurrences[i] = occ;
+        tri_descripteurs[i+1] = tri_descripteurs[i]; //On tri le descripteur en même temps que son occurrence pour qu'ils aient le même indice.
+        tri_descripteurs[i] = liste_descripteurs[pos];
+        }
+        else //Sinon on laisse l'occurrence et son descripteur à l'indice où ils sont et on sort de la boucle.
+        {
+        occurrences[i+1] = occ;
+        tri_descripteurs[i+1] = liste_descripteurs[pos];
+        break;
+        }
       }
     }
   }
@@ -247,6 +257,7 @@ void Recup_textes()
   int num_texte; // Numéro du texte ouvert (1 si le meilleur résultat)
   int nouveau_texte; //Numéro du texte à ouvrir.
   int nb_descripteurs_variable; //Le nombre de descripteurs dépassant le seuil d'occurrences
+  char titre[1000];//Contiendra le titre du texte à ouvrir.
   FILE* ptr_fic;
 
   if(STOP==0) //SI STOP est toujours à 0 (après Recherche() de traiter_mot_cle.c) on fait cette étape.
@@ -260,9 +271,16 @@ void Recup_textes()
     fscanf(ptr_fichierTEMP,"%d",&seuil_occ); //On récupère le seuil d'occurrences
     }else fprintf(stderr, "ERREUR pointeur file.temp\n");
 
+    fclose(ptr_fichierTEMP); //On ferme le fichier.
+
     Recup_descripteurs(); //On récupère la liste de tous les descripteurs contenant le mot choisi.
     nb_descripteurs = compter_mots(CHEMIN,"descripteurs_correspondants.temp"); //On compte le nombre de descripteurs contenant le mot choisi
     nb_descripteurs_variable = nb_descripteurs; //On initialise le nombre des descripteurs dépassant le seuil avec la totalité des descripteurs contenant le mot choisi.
+
+    //On alloue la taille nécessaire aux tableaux qui vont contenir les descripteurs et leurs occurrences.
+    liste_descripteurs = malloc(nb_descripteurs * sizeof(int));
+    occurrences = malloc(nb_descripteurs * sizeof(int));
+    tri_descripteurs = malloc(nb_descripteurs * sizeof(int));
 
     Enregistrer_descripteurs();
 
@@ -277,7 +295,11 @@ void Recup_textes()
       }
     }
 
-    if(nb_descripteurs_variable == 0)  //Si aucun ne dépasse le seuil on affiche quand même le meilleur résultats
+    //On libère la liste des descripteurs non triés ainsi que la liste des occurrences dont on a plus besoin une fois le tri des descripteurs terminé.
+    free(liste_descripteurs);
+    free(occurrences);
+
+    if(nb_descripteurs_variable == 0)  //Si aucun ne dépasse le seuil on affiche quand même le meilleur résultat
     {
       nb_descripteurs_variable ++;
     }
@@ -347,12 +369,6 @@ void Recup_textes()
         }
       }while(nouveau_texte != 0); //Tant qu'on ne demande pas à quitter.
     }
-  }
-
-  for(i=0;i < nb_descripteurs;i++) //On réinitialise les tableaux où étaient enregistrer les descripteurs et les occurrences
-  {
-    liste_descripteurs[i] = 0;
-    occurrences[i] = 0;
-    tri_descripteurs[i] = 0;
+    free(tri_descripteurs); //On peut libérer le tableau où sont rangés les descripteurs triés.
   }
 }

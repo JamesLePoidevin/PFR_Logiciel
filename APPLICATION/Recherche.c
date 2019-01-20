@@ -9,7 +9,7 @@ void Recherche_par_mot_cle()
   Recherche();//On débute le processus de recherche en demandant la saisie du mot (Dans traiter_mot_cle.c)
   Recup_textes();//On fini la recherche en récupèrant les textes pertinents (Dans recup_textes.c)
 
-  system("rm *.temp");//On supprime tous les fichiers temporaires;
+  system("rm *.temp");//On supprime tous les fichiers temporaires une fois que la recherche est terminée.
 
   do //On demande s'il veut effectuer une nouvelle recherche tant qu'il ne fait pas une saisie correcte.
   {
@@ -27,7 +27,7 @@ void Recherche_par_mot_cle()
         case 1 : boucle = 10; //S'il choisit OUI on change la valeur de la boucle pour en sortir à la fin.
                  vider_buffer();//On vide le buffer.
                  Recherche_par_mot_cle();//ON lance une nouvelle recherche par mot clé.
-                 return;
+                 break;
 
         case 2 : boucle = 10; //S'il choisit NON on change la valeur de la boucle pour en sortir.
                  vider_buffer();//On vide le buffer

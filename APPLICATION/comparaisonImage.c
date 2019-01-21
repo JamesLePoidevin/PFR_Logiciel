@@ -1,5 +1,6 @@
 #include "comparaisonImage.h"
 
+
 int AffichageFichier(){
 	FILE *ptr_NomDesFichiers;
 	char NomDesFichiers[1024][1024];

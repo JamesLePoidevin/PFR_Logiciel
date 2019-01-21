@@ -28,7 +28,7 @@ void enleverPointEtVirgule(char* mot){
 
     }else if(ptr_adressepoint != NULL){
       /*trouver une eutre facon de faire */
-      ptr_adressepoint = '\0';
+      strcpy(ptr_adressepoint , "\0");
     }else strcpy(ptr_adressevirgule,"\0");
 
   }
@@ -78,7 +78,7 @@ void enleverAppostrophe(char* mot){
   ptr_adresseApp = strchr(mot,'\'');
 
   if(ptr_adresseApp){
-    mot = ptr_adresseApp+1;
+    strcpy(mot, ptr_adresseApp+1);
   }
 }
 
@@ -93,7 +93,7 @@ void enleverParenthese(char * mot){
   if(ptr_adresseParentheseOuvrante || ptr_adresseParentheseFermante){
     /* Cas ou on a : (MOT */
     if(ptr_adresseParentheseOuvrante){
-      mot = ptr_adresseParentheseOuvrante+1;
+      strcpy(mot,ptr_adresseParentheseOuvrante+1);
     }
     /* Cas ou on a : MOT)*/
     if(ptr_adresseParentheseFermante){
@@ -311,14 +311,13 @@ void IndexationComplet(){
 
   type_des descripteur = init_des();
   
-  /*pour l'indexation complète*/
+  /*pour l'indexation complète on supprime les fichier pour recommencer a 0*/
   if(fopen("FILES/Descripteur","w")){
     system("rm FILES/Descripteur");
   }
   if(fopen("FILES/MotsCles","w")){
     system("rm FILES/MotsCles");
   } 
-  //system("rm FILES/MotsCles");
 
   ptr_adresse = fopen("FILES/NomDesFichiers","r");
   if(ptr_adresse !=NULL){
@@ -330,8 +329,6 @@ void IndexationComplet(){
 
       strcpy(adresse,Chemin_text);
       strcat(adresse,nomdufichier);
-
-      //printf("%s\n", adresse);
 
       FILE * ptr_fic;
       ptr_fic = fopen(adresse,"r");

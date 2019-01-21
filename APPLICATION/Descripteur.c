@@ -1,7 +1,9 @@
 #include "Descripteur.h"
 
-
-
+/**
+ * recupere dans le fichier de parametre le nombre de mot par descripteur
+ * @return le nombre de mot
+ */
 int recuperer_Valuer_Descripteur(){
 	FILE* ptr;
 	int a;

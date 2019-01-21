@@ -8,7 +8,7 @@ tous le long de CommandeSysteme.c les seul fonction utiliser sont
 	-strcpy(char*,char*);
 	-systeme(char*);
 */
-
+int lireparametrecompar();
 
 void listeDeFichiers(char *adresseDeBase,char *fichierDArriver);
 

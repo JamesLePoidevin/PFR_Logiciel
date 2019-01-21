@@ -1,8 +1,5 @@
 #include "CommandeSysteme.h"
 
-
-
-
 /**
  * creer un liste des fichier dans un dossier et passe la liste dans un fichier
  * @param adresseDeBase   adresse du dossier a lister les fichier
@@ -17,6 +14,30 @@ void listeDeFichiers(char *adresseDeBase,char *fichierDArriver){
 	system(commande);
 }
 
+/**
+ * lire le pourcentage nécessaire pour afficher les fichier 
+ * @return le pourcentage de comparasion
+ */
+int lireparametrecompar(){
+
+  int paramcomp;
+
+  system("sed '2,2!d' Param/param_comparaison > file.tmp");
+  
+
+  FILE *ptr_fichierTEMP;
+
+  ptr_fichierTEMP =fopen("file.tmp","r");
+  if(ptr_fichierTEMP !=NULL){
+    fscanf(ptr_fichierTEMP,"%d",&paramcomp);
+  }else fprintf(stderr, "ERREUR pointeur file.tmp / CommandeSysteme l.30\n");
+  fclose(ptr_fichierTEMP);
+
+  system("rm file.tmp");
+
+  return paramcomp;
+
+}
 
 /**
  * Compte les mot dans un fichier et place le nombre dans un fichier secondaire

@@ -247,8 +247,6 @@ void afficher_liste_textes()
   printf("\n\n");
 }
 
-
-
 //La fonction qui permet de récupérer tous les textes correspondants à la recherche de l'utilisateur.
 void Recup_textes()
 {
@@ -274,6 +272,7 @@ void Recup_textes()
     }else fprintf(stderr, "ERREUR pointeur file.temp\n");
 
     fclose(ptr_fichierTEMP); //On ferme le fichier.
+
 
     Recup_descripteurs(); //On récupère la liste de tous les descripteurs contenant le mot choisi.
     nb_descripteurs = compter_mots(CHEMIN,"descripteurs_correspondants.temp"); //On compte le nombre de descripteurs contenant le mot choisi

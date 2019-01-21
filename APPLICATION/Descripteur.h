@@ -1,8 +1,7 @@
 #include "CommandeSysteme.h"
 #include "Mot.h"
 
-//int N = 11; // nombre de mot_cle
-//const char * adresse "../Source/FILES/parametre"
+
 
 typedef struct type_des
 {

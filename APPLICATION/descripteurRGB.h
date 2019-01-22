@@ -2,6 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+
+//Descripteur pour le image RGB
 typedef struct type_descRGB
 {
 	int ref;

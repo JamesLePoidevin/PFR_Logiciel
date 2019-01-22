@@ -1,8 +1,6 @@
 #include "menu.c"
 
 int main(){
-
-  
   //Partie mode Admin
   system("clear");
   menu_comparaison();

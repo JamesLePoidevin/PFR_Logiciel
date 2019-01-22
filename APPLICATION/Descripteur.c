@@ -7,27 +7,16 @@
 int recuperer_Valuer_Descripteur(){
 	int nb;
 
-	//prend ce qui est a la ligne 2 de Param/param_indexation et le met dans un fichier temporaire
-	system("sed '2,2!d' Param/param_indexation > file.tmp");
+  FILE * ptrparam;
 
-  
-  	FILE *ptr_fichierTEMP;
+  ptrparam = fopen("../APPLICATION/Param/param_indexation","r");
 
-  	//ouvre le fichier file.tmp
-  	ptr_fichierTEMP =fopen("file.tmp","r");
+  if(ptrparam != NULL){
+    fscanf(ptrparam,"%*s%*s%*s%*s%*s%*s%d",&nb);
+  }
+  fclose(ptrparam);
 
-  	//si le fichier c'est bien ouvert
-  	if(ptr_fichierTEMP !=NULL){
-  		//lit le nombre de mot a 
-    	fscanf(ptr_fichierTEMP,"%d",&nb);
-  	}else fprintf(stderr, "ERREUR pointeur file.tmp\n");
-
-  	//ferme le poiteur de fichier temp
-  	fclose(ptr_fichierTEMP);
-
-  	//renvoie le nombre de mot
-  	return nb;
-
+  return nb;
 }
 
 /**
@@ -97,6 +86,7 @@ void Trier_tab_mot(type_mot tab[],type_mot tab2[], int length){
 
          strcpy(tab[j].mot,elem.mot);
          tab[j].occurence = elem.occurence; 
+      free(elem.mot);
    }
    
    //inverse le tableau pour affichier dans l'odre decroissante et le met dans le tableau2
@@ -105,6 +95,8 @@ void Trier_tab_mot(type_mot tab[],type_mot tab2[], int length){
   	tab2[indice].occurence = tab[i].occurence;
   	indice++;
 	}
+
+  
 }
 
 /**
@@ -114,9 +106,11 @@ void Trier_tab_mot(type_mot tab[],type_mot tab2[], int length){
  */
 int test_int(){      
     char nombre[50] = "";
-    scanf("%s", nombre);
+    scanf("%s", nombre);	//prend une chaine de char entrée par le clavier
+
     if(strchr(nombre, '.') != 0){
-         return 0;
+
+         return 0;	//renvoie 0 si c'est pas un entier
      }
     return atoi(nombre);
 }

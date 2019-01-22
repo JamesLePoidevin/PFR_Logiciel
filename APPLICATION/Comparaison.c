@@ -128,7 +128,7 @@ type_des comp = init_des();
 comp = listeDescripteur[choix+1];
 
 //creation d'un tableau de type resultat qui prend le numero de descripteur et le similutude 
-type_resultattext *listeresultat = malloc(indice1 * sizeof(type_resultattext)); 
+type_resultattext *listeresultat = malloc(indice * sizeof(type_resultattext)); 
 
 //indice du tableau listeresultat  
 int index = 0;
@@ -171,11 +171,13 @@ for (int i = 0; i < 100; i++)
 	nomfich[i] = malloc(1024 * sizeof(char));
 }
 
+int pourcentageparam = lireparametrecompar();
+
 
 printf("Voici la liste des fichiers dans l'ordre:\n");
 	for (int i = index-1; i > 1; i--){ 
 		/*si la similitude est supperieur au parametre alors on l'afficher*/
-		if(listeresultat[i].sim > lireparametrecompar()){ 
+		if(listeresultat[i].sim > pourcentageparam){ 
 
 			/*on cherche le nom du fichier a partir du listeresultat.id*/
 			for (int j = 0; j < indice; j++){
@@ -219,5 +221,13 @@ printf("Voici la liste des fichiers dans l'ordre:\n");
 			system(commande);
 		}
 	}while(boolean != 0);
+
+for (int i = 0; i < indice; i++)
+{
+	for (int j = 0; j < recuperer_Valuer_Descripteur(); j++)
+	{
+		free(listeDescripteur[i].tab[j].mot);
+	}
+}
 
 }

@@ -1,23 +1,47 @@
 #include "indexationAuto.h"
 
+/**
+ * fonction qui rajoute un descripteur dans le fichier FILES/Descripteur et les mots cles des 
+ * descripteur dans le fichier ../APPLICATION/FILES/MotsCles	
+ * @param A descripteur a ajouter
+ */
 void AjouterDES(type_des A){
 
+	//poitneur de fichier
 	FILE *ptr_FichierDes;
 	FILE *ptrFichierMC;
+
+	//ouverture des fichier ../APPLICATION/FILES/MotsCles et ../APPLICATION/FILES/Descripteur
 	ptrFichierMC=fopen("../APPLICATION/FILES/MotsCles","a");
 	ptr_FichierDes =fopen("../APPLICATION/FILES/Descripteur", "a");
 
-	fprintf(ptr_FichierDes,"%d\n",A.ref );
-	for (int i = 0; i < recuperer_Valuer_Descripteur(); i++) {
-		fprintf(ptr_FichierDes, "%s %d\n",A.tab[i].mot,A.tab[i].occurence);
-		fprintf(ptrFichierMC, "%s %d\n",A.tab[i].mot,A.ref);
-	}
+	//si les fichiers ce sont bien ouvert
+	if(ptrFichierMC != NULL && ptr_FichierDes != NULL){
 
+		//on ecrit la reference dans le fichier mot cles
+		fprintf(ptr_FichierDes,"%d\n",A.ref );
+
+			//pour 0 jusqu'a nombre de mot on les ecrit a la suite dans ptr_FichierDes et ptrFichierMC
+			for (int i = 0; i < recuperer_Valuer_Descripteur(); i++) {
+				fprintf(ptr_FichierDes, "%s %d\n",A.tab[i].mot,A.tab[i].occurence);
+				fprintf(ptrFichierMC, "%s %d\n",A.tab[i].mot,A.ref);
+			}
+
+			//message d'erreur
+	}else fprintf(stderr, "ERREUR pointeur motslces ou Descripteur / indexationAUTO l.25\n");
+
+	//fermeture des fichiers ouvert
 	fclose(ptr_FichierDes);
 	fclose(ptrFichierMC);
 }
 
+
+/**
+ * fonction qui verifie si depuis le dernier lancement du programme il y a eu des descripteur Ajouter
+ * @param CHEMIN des fichier a indexer
+ */
 void AjouteDESManquant(char* CHEMIN){
+
 	char NomFichier[1024];
 	char NomFichier1[1024];
 	char commande[1024];
@@ -31,22 +55,37 @@ void AjouteDESManquant(char* CHEMIN){
 	FILE * ptr_test;
 	FILE * ptr_test1;
 
+	//il de type_des 
 	PILE p = init_PILE();
+
+	//creer un fichier avec le nom des fichier dans le fichier NomDesFichiersaux et indice
+	//correspond au nombre de fichier
 	int indice = NomDesFichiers(CHEMIN,"NomDesFichiersaux");
 
 	//ajouter descripteur manquant
 	ptr_test =fopen("../APPLICATION/FILES/NomDesFichiersaux", "r");
+
+	//si le fichier c'est bien ouvert
 	if(ptr_test != NULL){
+		//tant que le fichier n'est pas vide
 		while ( !feof(ptr_test) ){
+
+
 			fscanf(ptr_test, "%s %d",NomFichier,&reference);
 			etat =0;
 
+			//on ouvre l'ancien fichier des nomDEs Fichier
 			ptr_test1 =fopen("../APPLICATION/FILES/NomDesFichiers", "r");
+
+			//si le fichier est bien ouvert
 			if(ptr_test1 != NULL){
+				//tant qu'on a pas tous traiter
 				while ( !feof(ptr_test1) ){
+					//on stocke le nom du fichier et la reference
 					fscanf(ptr_test1, "%s %d",NomFichier1,&reference1);
-					if (strcmp(NomFichier,NomFichier1)==0)
-					{
+					//on compar pour voir si les fichier est dans les deux fichier
+					if (strcmp(NomFichier,NomFichier1)==0){
+						//si le fichier est deja indexer
 						etat = 1;
 					}
 				}
@@ -73,7 +112,6 @@ void AjouteDESManquant(char* CHEMIN){
 		}
 	}
 	fclose(ptr_test);
-	programme("../APPLICATION/FILES/MotsCles");
 }
 
 void SuppresionDESEnTrop(char* CHEMIN){
@@ -129,19 +167,24 @@ void SuppresionDESEnTrop(char* CHEMIN){
 				char aux1[1024];
 				char aux2[1024];
 				char aux3[1024];
+
 				sprintf(aux1,"%d",ligne);
 				sprintf(aux2, "%d",ligne +recuperer_Valuer_Descripteur());
+				
 				strcpy(commande,"sed '");
 				strcat(commande,aux1);
 				strcat(commande,",");
 				strcat(commande,aux2);
 				strcat(commande,"d' FILES/Descripteur>Descripteur.tmp && mv Descripteur.tmp FILES/Descripteur");
+				
 				system(commande);
+				
 				sprintf(aux3," %s",aux);
 
 				strcpy(commande, "sed '");
 				strcat(commande, aux);
 				strcat(commande, "d' FILES/NomDesFichiers > NomDesFichiers.tmp && mv NomDesFichiers.tmp FILES/NomDesFichiers");
+				
 				system(commande);
 
 				FILE *ptr_MC1;

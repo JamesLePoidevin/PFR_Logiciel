@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+//Descripteur pour le image Noir et blanc
 typedef struct type_descNB
 {
 	int ref;

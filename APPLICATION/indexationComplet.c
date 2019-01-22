@@ -165,6 +165,7 @@ int enleverBalise2(FILE * ptr_fic,type_mot tab[]){
 
   while(fscanf(ptr_fic,"%s",mot)==1){
 
+
     /*ptr_debut_tag = adresse de '<' // ptr_fin_tag = adresse de '>' */
     char * ptr_debut_tag, *ptr_fin_tag, *ptr_avant;
 
@@ -193,7 +194,6 @@ int enleverBalise2(FILE * ptr_fic,type_mot tab[]){
     enleverAppostrophe(mot);
     enleverParenthese(mot);
 
-    
     
     if(strlen(mot)>3){
     /*met le mot dans tableau tab et verifier si le mot est deja dans le tableau*/
@@ -270,7 +270,7 @@ char* lirechemin(){
 type_des FaireDescripteur(FILE * ptr_fic,int reference){
   int nbmot;
    type_des descripteur = init_des();
-   type_mot tab[5000];
+   type_mot *tab = malloc(5000 * sizeof(type_mot));
 
     for (int i = 0; i < 5000; i++)
     {
@@ -297,7 +297,21 @@ type_des FaireDescripteur(FILE * ptr_fic,int reference){
       /*Creer un descripteur a partir des réference et tableau ranger*/
       descripteur=CreerDescriteur(reference,tab2);
 
+      
+      for (int i = 0; i < 5000; i++)
+      {
+        free(tab[i].mot);
+      }
+      free(tab);
+
+      for (int i = 0; i < nbmot; i++)
+      {
+        free(tab2[i].mot);
+      }
+      free(tab2);
+
       return descripteur;
+
 }
 
 void IndexationComplet(){

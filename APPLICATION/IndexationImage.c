@@ -116,9 +116,3 @@ void Indexation(){
   fclose(ptr_ImageNB);
   fclose(ptr_chemin);
 }
-/*
-int main(int argc, char const *argv[])
-{
-	Indexation();
-	return 0;
-}*/

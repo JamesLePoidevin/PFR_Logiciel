@@ -2,44 +2,6 @@
 
 
 /**
- * Crée le descripteur du chemin adresse et avec la ref reference
- * @param  adresse   chemin de l'adresse à indexer
- * @param  reference reference
- * @return           descripteur
- */
-/*type_des FaireDescripteur(char adresse[],int reference){
-	int IndiceDuTableauTab;
-	enleverBalise(adresse,"fichieraux1")
-	CompterMot("fichieraux1", "NombreDeMotFichier");
-	type_des A = init_des();
-
-	FILE *ptr_fichier;
-	ptr_fichier = fopen("NombreDeMotFichier", "r");
-
-	if( ptr_fichier != NULL)
-	{
-		int nbDeMot = NombreDeMot(ptr_fichier);
-		fclose(ptr_fichier);
-
-		type_mot tab[nbDeMot];
-		type_mot tab2[nbDeMot];
-
-		FILE *ptr_fic;
-	    ptr_fic = fopen("FichierAux1", "r");	//fichierAux1 crée dans remove balise
-	    if(ptr_fic!=NULL){
-		IndiceDuTableauTab =read_word(ptr_fic,tab);
-		fclose(ptr_fic);
-	}
-
-	Trier_tab_mot(tab,tab2,IndiceDuTableauTab);
-	A=CreerDescriteur(reference,tab2);
-	return A;
-	//remove("FichierAux1");
-}
-return A;
-}*/
-
-/**
  * lit le nombre de mots dans un fichier
  * @param  fichierMot pointeur de fichier
  * @return            nb mot ou 0

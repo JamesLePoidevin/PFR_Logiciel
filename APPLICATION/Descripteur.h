@@ -2,7 +2,7 @@
 #include "Mot.h"
 
 
-
+//structure descripteur pour les texte
 typedef struct type_des
 {
 	int ref;

@@ -77,7 +77,7 @@ printf("Les fichiers qui ont une ressemblence supérieur à 0 pourcent pour le f
 //Liste de descripteur
 type_des listeDescripteur[indice-2];
 
-for (int i = 0; i < indice; i++)
+for (int i = 0; i < indice-2; i++)
 {
 	listeDescripteur[i] = init_des();
 }
@@ -134,7 +134,7 @@ type_resultattext *listeresultat = malloc(indice * sizeof(type_resultattext));
 int index = 0;
 
 //Calcule de la similitude des fichiers
-for (int i = 0; i < indice-1; i++){
+for (int i = 0; i < indice-2; i++){
 	//on initialise pourcentage a 0 au debut de chaque nouveau descipteur
 	pourcentage =0;
 	for (int j = 0; j < recuperer_Valuer_Descripteur(); j++){
@@ -180,7 +180,7 @@ printf("Voici la liste des fichiers dans l'ordre:\n");
 		if(listeresultat[i].sim > pourcentageparam){ 
 
 			/*on cherche le nom du fichier a partir du listeresultat.id*/
-			for (int j = 0; j < indice; j++){
+			for (int j = 0; j < indice-1; j++){
 				if(des[j] == listeresultat[i].id){
 			
 				printf("[%d] %s %f\n",index-i,NomDesFichiers[j],listeresultat[i].sim);

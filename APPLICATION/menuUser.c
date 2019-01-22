@@ -20,7 +20,7 @@ void menu_user(){
       case 1 : printf("Vous avez choisi les textes\n");
         do
         {
-          printf("Que voulez-vous faire ? (1) Recherche par mots-clé, (2) Comparaison \n");
+          printf("Que voulez-vous faire ? (1) Recherche par mot-clé, (2) Comparaison \n");
           action = test_int();
 
         }while(action != 1 && action != 2);

@@ -297,9 +297,8 @@ type_des FaireDescripteur(FILE * ptr_fic,int reference){
       /*Creer un descripteur a partir des réference et tableau ranger*/
       descripteur=CreerDescriteur(reference,tab2);
 
-      
-      for (int i = 0; i < 5000; i++)
-      {
+      //creer des erreur
+      for (int i = 0; i < 5000; i++){
         free(tab[i].mot);
       }
       free(tab);
@@ -354,11 +353,13 @@ void IndexationComplet(){
       
       /*Ecrit dans le fichier Mots-cles*/
       ecritureMotCles(descripteur);
-  }
+
+    }
 }else fprintf(stderr, "ERREUR pointeur Fichier nomDesFichiers\n");
 
 
 free(nomdufichier);
 free(adresse);
+
 }
 

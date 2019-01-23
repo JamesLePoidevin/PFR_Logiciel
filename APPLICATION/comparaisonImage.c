@@ -116,6 +116,10 @@ int calculeSimilitudeNB(PILENB P1,type_resultat* res,type_descNB A){
 	return ind;
 }
 
+void ouvrirImageNB(char * nom){
+	char chemin;
+}
+
 void compair(int choix){
 
 	FILE *ptr_NomDesFichiers;
@@ -130,7 +134,6 @@ void compair(int choix){
 		indice ++;	//indice égal au nombre de fichiers 
 	}
 }else fprintf(stderr, "ERREUR pointeur fichier NomDesFichiers\n" );
-
 
 fclose(ptr_NomDesFichiers);
 
@@ -274,6 +277,7 @@ if(NB == 1){	//si le fichier a comparer est Noir et blance
 		for (int i = 0; i < indice-1; i++){
 			if (des[i]==res[j].id){
 				printf("%s %d\n",NomDesFichiers[i],res[j].sim);
+
 			}
 		}
 	}

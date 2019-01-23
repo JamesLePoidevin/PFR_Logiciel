@@ -1,5 +1,7 @@
 #include "IndexationImage.h"
 
+//faire focntion
+
 char * CHEMINIMAGE ="../IMAGE/";
 
 int NomDesFichiersImage(char *CHEMIN){

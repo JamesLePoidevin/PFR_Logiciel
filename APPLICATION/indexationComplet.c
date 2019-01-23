@@ -298,7 +298,7 @@ type_des FaireDescripteur(FILE * ptr_fic,int reference){
       descripteur=CreerDescriteur(reference,tab2);
 
       //creer des erreur
-      for (int i = 0; i < 5000; i++){
+      /*for (int i = 0; i < 5000; i++){
         free(tab[i].mot);
       }
       free(tab);
@@ -307,7 +307,7 @@ type_des FaireDescripteur(FILE * ptr_fic,int reference){
       {
         free(tab2[i].mot);
       }
-      free(tab2);
+      free(tab2);*/
 
       return descripteur;
 

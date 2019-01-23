@@ -14,9 +14,6 @@ int test_pourcentage(){      // cas où on souhaite un entier ou un float
   else return atoi(nombre);
 }
 
-//LANCER INDEXATION MANUELLE
-
-
 
 //VISUALISER LES DESCRIPTEURS
 //Pour les descipteurs de texte
@@ -389,7 +386,7 @@ void menu_chemins(){
 void menu_admin(){
   system("clear");
   printf("Menu Mode Administrateur:\n1-Visualiser les descripteurs\n2-Accéder aux paramètres de recherche\n3-Accéder aux paramètres de comparaison\n");
-  printf("4-Accéder aux paramètres d'indexation\n5-Changer les chemins\n6-Accéder au Mode Utilisateur\n7-Quitter le programme\n");
+  printf("4-Accéder aux paramètres d'indexation\n5-Changer les chemins\n6-Lancer l'indexation complète\n7-Accéder au Mode Utilisateur\n8-Quitter le programme\n");
   int n;
   n=test_int();
   switch(n){
@@ -412,9 +409,15 @@ void menu_admin(){
       menu_chemins(); //Ce choix permet d'accéder au menu pour changer les chemins
       break;
     case 6 :
-      menu_user();
+      IndexationComplet(); //Ce choix permet de lancer l'indéxation
+      printf("L'indexation a bien été effectuée.\n");
+      sleep(2);
+      menu_admin();
       break;
     case 7 :
+      menu_user();
+      break;
+    case 8 :
       return;
       break;
     default :

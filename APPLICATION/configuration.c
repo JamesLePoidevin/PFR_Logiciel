@@ -129,7 +129,6 @@ void param_compar_texte(){
   strcpy(commande,"sed -i '2s/.*/"); //Suppression de la deuxième ligne du fichier param_comparaison.txt
   strcat(commande, seuil_compar_char);
   strcat(commande,"/'  Param/param_comparaison"); //Remplacement de la deuxième ligne du fichier param_comparaison.txt, avec le nouveau seuil
-  printf("%s",commande);
   system(commande);
 }
 
@@ -161,12 +160,12 @@ void param_compar_img_coul(){
   float seuil_compar_img_coul;
   do {
     printf("Quel seuil de similarité voulez-vous pour la comparaison d'images en couleur? (en pourcentage)\n");
-    seuil_compar_img_coul = test_pourcentage();
+    seuil_compar_img_coul = test_int();
     sprintf(seuil_compar_img_coul_char,"%f",seuil_compar_img_coul);
-    if (seuil_compar_img_coul<0 || seuil_compar_img_coul>100){
+    if (seuil_compar_img_coul<=0){
       printf("Erreur: Le nombre entré n'est pas conforme.\n");
     }
-  }while(seuil_compar_img_coul<0 || seuil_compar_img_coul>100);
+  }while(seuil_compar_img_coul<=0);
   //system("sed -i '2s/.*/%nbr_mots%/'  param_indexation.txt"); //Suppression de la sixième ligne du fichier param_comparaison.txt et remplacement par le nouveau seuil_compar
   char commande[1024];
   strcpy(commande,"sed -i '6s/.*/"); //Suppression de la sixième ligne du fichier param_comparaison.txt
@@ -238,6 +237,7 @@ void param_index_texte(){
 }
 
 //Image
+/*
 void param_index_image(){
   system("clear");
   char nbr_bits_char[50];
@@ -250,16 +250,16 @@ void param_index_image(){
     }
   }while(nbr_bits>8 || nbr_bits<=0);
   sprintf(nbr_bits_char,"%d",nbr_bits);
-  char commande[1024];
-  strcpy(commande, "sed -i '4s/.*/"); //Suppression de la quatrième ligne du fichier param_indexation.txt
-  strcat(commande, nbr_bits_char);
-  strcat(commande,"/' Param/param_indexation"); //Remplacement de la quatrième ligne du fichier param_indexation.txt, avec le nouveau nombre
-  system(commande);
-}
+  char commande[1024];*/
+  //strcpy(commande, "sed -i '4s/.*/"); //Suppression de la quatrième ligne du fichier param_indexation.txt
+  //strcat(commande, nbr_bits_char);
+  //strcat(commande,"/' Param/param_indexation"); //Remplacement de la quatrième ligne du fichier param_indexation.txt, avec le nouveau nombre
+  //system(commande);
+//}
 
 //Menu indexation (choix entre texte ou image)
 void menu_index(){
-  printf("Menu indexation:\n1-Paramétrer l'indexation des textes\n2-Paramétrer l'indexation des images\n3-Retour au Mode administrateur\n4-Quitter le programme\n");
+  printf("Menu indexation:\n1-Paramétrer l'indexation des textes\n2-Retour au Mode administrateur\n3-Quitter le programme\n");
   int n;
   n = test_int();
   switch(n){
@@ -270,14 +270,8 @@ void menu_index(){
       menu_index();
       break;
     case 2 :
-      param_index_image(); //Ce choix permet de changer les paramètres d'indexation d'image
-      system("clear");
-      printf("\nLes paramètres d'indexation ont été modifiés avec succès.\n");
-      menu_index();
-      break;
-    case 3 :
       menu_admin();
-    case 4 :
+    case 3 :
       return;
       break;
     default :

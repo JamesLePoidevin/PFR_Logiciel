@@ -1,16 +1,51 @@
 #include "comparaisonImage.h"
 
 int test_entier(){      // cas où on souhaite un entier ou un float
-  char nombre[50] = "";
-  int num = 0;
-  char zero[] = "0";
+	char nombre[50] = "";
+	int num = 0;
+	char zero[] = "0";
 
-  scanf("%s", nombre);
+	scanf("%s", nombre);
 
-  if (atoi(nombre) == 0 && strcmp(zero, nombre) != 0){
-    return -1;
-  }
-  else return atoi(nombre);
+	if (atoi(nombre) == 0 && strcmp(zero, nombre) != 0){
+		return -1;
+	}
+	else return atoi(nombre);
+}
+
+/**
+ * Lire le pourcentage necesaire pour affichier le similitude
+ */
+int lirepourcentage(){
+
+	int pourcentage_nb;
+
+	system("sed '4,4!d' Param/param_comparaison > file.tmp");
+
+
+	FILE *ptr_fichierTEMP;
+
+	ptr_fichierTEMP =fopen("file.tmp","r");
+	if(ptr_fichierTEMP !=NULL){
+		fscanf(ptr_fichierTEMP,"%d",&pourcentage_nb);
+	}else fprintf(stderr, "ERREUR pointeur file.tmp\n");
+	return pourcentage_nb;
+
+}
+
+int lirepourcentageRGB(){
+	int pourcentage_RGB;
+
+	system("sed '6,6!d' Param/param_comparaison > file.tmp");
+
+
+	FILE *ptr_fichierTEMP;
+
+	ptr_fichierTEMP =fopen("file.tmp","r");
+	if(ptr_fichierTEMP !=NULL){
+		fscanf(ptr_fichierTEMP,"%d",&pourcentage_RGB);
+	}else fprintf(stderr, "ERREUR pointeur file.tmp\n");
+	return pourcentage_RGB;
 }
 
 /**
@@ -231,7 +266,7 @@ if(ptrImageNB!=NULL){
 	}
 }else fprintf(stderr, "ERREUR pointeur DescripteurImageNB\n");
 fclose(ptrImageNB);
-	
+
 
 if(NB == 1){	//si le fichier a comparer est Noir et blance
 	
@@ -250,49 +285,55 @@ if(NB == 1){	//si le fichier a comparer est Noir et blance
 
 	system("clear");
 
+	int pourcentage_nb = lirepourcentage();
+
+
 	int in = 1;
 	//Affichage dans l'ordre décroissant 
 	printf("Voici la liste des fichiers dans l'ordre:\n");
-	for (int j = ind-1; j >ind-6 ; j--){
+	for (int j = ind-1; j >0 ; j--){
 		for (int i = 0; i < indice-1; i++){
-			if (des[i]==res[j].id){
-				printf("[%d] %s %d\n",in,NomDesFichiers[i],res[j].sim);
-				in ++;
+			if(res[j].sim> pourcentage_nb){
+				if (des[i]==res[j].id){
+					printf("[%d] %s %d\n",in,NomDesFichiers[i],res[j].sim);
+					in ++;
+				}
 			}
 		}
 	}
 
 	int boolean;
+	if(in != 0){
 		do{
-		do{
-			printf("\nQuel fichier voulez-vous visualiseR?\nVeuillez rentrer le numero à gauche \n [0] pour quitter \n");
+			do{
+				printf("\nQuel fichier voulez-vous visualiseR?\nVeuillez rentrer le numero à gauche \n [0] pour quitter \n");
 
 		//lit le choix de l'utilisateur
-		boolean = test_entier();
+				boolean = test_entier();
 
-		}while(boolean < 0 || boolean > 6);
-		if(boolean != 0){
+			}while(boolean < 0 || boolean > 6);
+			if(boolean != 0){
 
 			//affichage du texte choisi
-			int choix1;
+				int choix1;
 
-			for (int i = 0; i < indice-1; i++){
-				if(choix == des[i]){
-					choix1 = i;
+				for (int i = 0; i < indice-1; i++){
+					if(choix == des[i]){
+						choix1 = i;
+					}
+				}
+				printf("%d\n", choix1);
+
+				ouvrirImageNB(NomDesFichiers[choix1]);
+
+				for (int i = 0; i < indice-1; i++){
+					if (des[i]==res[ind-boolean].id){
+						ouvrirImageNB(NomDesFichiers[i]);
+					}
 				}
 			}
-			printf("%d\n", choix1);
-
-			ouvrirImageNB(NomDesFichiers[choix1]);
-
-			for (int i = 0; i < indice-1; i++){
-				if (des[i]==res[ind-boolean].id){
-					ouvrirImageNB(NomDesFichiers[i]);
-			}
-		}
-		}
-	}while(boolean != 0);
-
+		}while(boolean != 0);
+	}else printf("Il n'y a aucune fichier correspondant\n");sleep(2);
 
 }else		//si l'image a comparer est rouge vert et bleu
 {
@@ -342,69 +383,74 @@ if(NB == 1){	//si le fichier a comparer est Noir et blance
 
 		//on depile la pile et le place dans un type_descRGB auxiliaire
 		P2 = dePILERGB(P2,&AUX2);
-		
+
 		//on remplit le tableau de resultat
-		res[ind].id = AUX2.ref;
-		res[ind].sim = 0;
+	res[ind].id = AUX2.ref;
+	res[ind].sim = 0;
 
 		//calcule de la similitude
-		for (int i = 0; i < 64; i++){
-			res[ind].sim = res[ind].sim + (int)min(AUX2.tab[i],B.tab[i]);
-		}
-		ind ++;
+	for (int i = 0; i < 64; i++){
+		res[ind].sim = res[ind].sim + (int)min(AUX2.tab[i],B.tab[i]);
 	}
+	ind ++;
+}
 
-	system("clear");
+system("clear");
 	//Tri du tableau des resultats par ordre croissant pour être affiché dans
 	//l'ordre décroissant
-	triTableauResultat(res,ind);
+triTableauResultat(res,ind);
 
-	int in = 1;
+int in = 1;
+
+int valeursim = lirepourcentageRGB();
 
 	//Affichage dans l'ordre décroissant 
-	printf("Voici la liste des fichiers dans l'ordre:\n");
-	for (int j = ind-1; j >ind-6 ; j--){
-		for (int i = 0; i < indice-1; i++){
+printf("Voici la liste des fichiers dans l'ordre:\n");
+for (int j = ind-1; j >0 ; j--){
+	for (int i = 0; i < indice-1; i++){
+		if(valeursim < res[j].sim){
 			if (des[i]==res[j].id){
 				printf("[%d] %s %d\n",in,NomDesFichiers[i],res[j].sim);
 				in ++;
 			}
 		}
 	}
+}
 
-	int boolean;
-	
-		do{
-		
+int boolean;
 
-		do{
+if(in != 0){
+do{
 
-			printf("\nQuel fichier voulez vous visualiser?\n Veuillez rentrer le numero à gauche : \n [0] pour quitter \n");
+	do{
+
+		printf("\nQuel fichier voulez vous visualiser?\n Veuillez rentrer le numero à gauche : \n [0] pour quitter \n");
 			//lit le choix de l'utilisateur
-			
+
 		boolean = test_entier();
 
-		}while(boolean < 0 || boolean > 6);
-		if(boolean != 0){
+	}while(boolean < 0 || boolean > 6);
+	if(boolean != 0){
 
 			//affichage du texte choisi
-			int choix1;
+		int choix1;
 
-			for (int i = 0; i < indice-1; i++){
-				if(choix == des[i]){
-					choix1 = i;
-				}
-			}
-			printf("%d\n", choix1);
-
-			ouvrirImageRGB(NomDesFichiers[choix1]);
-			for (int i = 0; i < indice-1; i++){
-				if (des[i]==res[ind-boolean].id){
-					ouvrirImageRGB(NomDesFichiers[i]);
+		for (int i = 0; i < indice-1; i++){
+			if(choix == des[i]){
+				choix1 = i;
 			}
 		}
+		printf("%d\n", choix1);
+
+		ouvrirImageRGB(NomDesFichiers[choix1]);
+		for (int i = 0; i < indice-1; i++){
+			if (des[i]==res[ind-boolean].id){
+				ouvrirImageRGB(NomDesFichiers[i]);
+			}
 		}
-	}while(boolean != 0);
+	}
+}while(boolean != 0);
+}else printf("Il n'y a aucune fichier correspondant\n");sleep(2);
 }
 }
 

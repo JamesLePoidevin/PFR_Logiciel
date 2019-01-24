@@ -198,7 +198,10 @@ printf("Voici la liste des fichiers dans l'ordre:\n");
 
 	
 	int boolean;
-	
+	if(nbFichierAfficher == 0){
+		printf("Malheursement il n'y a aucune fichier qui correspondant a vos parametre de recherche\n");
+		sleep(3);
+	}else{
 	//Menu d'affichage des possibilités
 	do{
 		printf("Quel fichier voulez-vous visualiser ? [0] pour quitter \n");
@@ -222,6 +225,6 @@ printf("Voici la liste des fichiers dans l'ordre:\n");
 			system(commande);
 		}
 	}while(boolean != 0);
-
+}
 
 }

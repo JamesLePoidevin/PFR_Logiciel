@@ -1,4 +1,5 @@
 #include "IndexationImage.h"
+#include <unistd.h>
 
 
 //structure permetant de faciliter le traitement des reultat
@@ -9,6 +10,8 @@ typedef struct type_resultat
 }type_resultat;
 
 int AffichageFichier();
+
+int lirepourcentage();
 
 //int test_pourcentage();
 int test_entier();

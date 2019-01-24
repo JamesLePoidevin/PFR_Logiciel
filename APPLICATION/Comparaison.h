@@ -1,4 +1,5 @@
 #include "indexationAuto.h"
+#include <unistd.h>
 
 //structude des resultat avec similitude et id
 typedef struct type_resultattext

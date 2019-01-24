@@ -145,20 +145,25 @@ void Recherche_extrait()
 
   printf("\nSaisir un mot (0 pour Quitter) : ");
   scanf("%s",mot_cle); //On récupère la saisie dans mot_cle (déclaré dans traiter_mot_cle.h)
-  if(mot_cle[0] != '0'){
-  //On récupère dans le fichier temporaire resultat.temp tous les mots contenant la saisie de l'utilisateur.
-  strcpy(recherche, "grep -i ");
-  strcat(recherche,mot_cle);
-  strcat(recherche," ");
-  strcat(recherche, CHEMIN2);
-  strcat(recherche,"MotsClesMin > ");
-  strcat(recherche, CHEMIN);
-  strcat(recherche, "resultat.temp");
 
-  system(recherche);
+  if(atoi(mot_cle) == 0) //Si la saisie n'est pas un nombre (sauf 0), on fait la suite de la recherche
+  {
+    if(mot_cle[0] != '0') //Si la saisie était 0 on n'a pas besoin de faire la recherche car on doit quitter.
+    {
+    //On récupère dans le fichier temporaire resultat.temp tous les mots contenant la saisie de l'utilisateur.
+    strcpy(recherche, "grep -i ");
+    strcat(recherche,mot_cle);
+    strcat(recherche," ");
+    strcat(recherche, CHEMIN2);
+    strcat(recherche,"MotsClesMin > ");
+    strcat(recherche, CHEMIN);
+    strcat(recherche, "resultat.temp");
 
-  Compare_mots(); //On lance la comparaison du resultat pour proposer à l'utilisateur une seule fois chaque correspondance.
-}
+    system(recherche);
+
+    Compare_mots(); //On lance la comparaison du resultat pour proposer à l'utilisateur une seule fois chaque correspondance.
+    }
+  }
   vider_buffer();//On vide le buffer de saisie pour être sûr qu'il ne reste pas de saisie parasite.
 }
 
@@ -173,71 +178,78 @@ void Recherche_mot_exact()
 
   printf("\nSaisir un mot complet (0 pour Quitter, 1 pour une nouvelle recherche): ");
   scanf("%s",mot_cle);
-  if (mot_cle[0] != '0' && mot_cle[0]!='1'){
 
-  //On regarde dans la liste des mots cles sans leurs descripteurs les lignes correspondants exactement à la recherche en récupérant aussi leur numéro de ligne.
-  //Ensuite on garde uniquement les numéros de lignes.
-  strcpy(recherche, "grep -x -n -i ");
-  strcat(recherche,mot_cle);
-  strcat(recherche," ");
-  strcat(recherche, CHEMIN);
-  strcat(recherche,"MotsClesMinSansDescripteurs.temp | cut -f1 -d ':' > ");
-  strcat(recherche, CHEMIN);
-  strcat(recherche, "lignes.temp");
-  system(recherche);
-
-  nb_lignes = compter_mots(CHEMIN,"lignes.temp"); //On compte le nombre de lignes total où se trouve le mot exact saisi.
-
-
-  ptr_fic = fopen("lignes.temp","r");//On ouvre la liste des lignes où se trouve le mot dans le fichier MotsClesMin
-
-  if(ptr_fic != NULL) //On vérfie qu'on a réussi à ouvrir la liste des lignes.
+  if(atoi(mot_cle) == 0 || atoi(mot_cle) == 1)
   {
-    for(i=0;i<nb_lignes;i++)
+    if (mot_cle[0] != '0' && mot_cle[0]!='1')
     {
-      fscanf(ptr_fic,"%d",&ligne); //On récupère le numero de la ligne dans la variable ligne.
 
-      sprintf(num_ligne,"%d",ligne);//On transforme ce numéro en un tableau de char.
+      //On regarde dans la liste des mots cles sans leurs descripteurs les lignes correspondants exactement à la recherche en récupérant aussi leur numéro de ligne.
+      //Ensuite on garde uniquement les numéros de lignes.
+      strcpy(recherche, "grep -x -n -i ");
+      strcat(recherche,mot_cle);
+      strcat(recherche," ");
+      strcat(recherche, CHEMIN);
+      strcat(recherche,"MotsClesMinSansDescripteurs.temp | cut -f1 -d ':' > ");
+      strcat(recherche, CHEMIN);
+      strcat(recherche, "lignes.temp");
+      system(recherche);
 
-      if(i==0) //Si c'est la première ligne on la récupère et on l'envoie dans le fichier temporaire resultat.temp
+      nb_lignes = compter_mots(CHEMIN,"lignes.temp"); //On compte le nombre de lignes total où se trouve le mot exact saisi.
+
+      ptr_fic = fopen("lignes.temp","r");//On ouvre la liste des lignes où se trouve le mot dans le fichier MotsClesMin
+
+      if(ptr_fic != NULL) //On vérfie qu'on a réussi à ouvrir la liste des lignes.
       {
-        strcpy(recup_lignes,"head ");
-        strcat(recup_lignes,"-");
-        strcat(recup_lignes,num_ligne);
-        strcat(recup_lignes," ");
-        strcat(recup_lignes,CHEMIN2);
-        strcat(recup_lignes,"MotsClesMin | tail -1 > ");
-        strcat(recup_lignes,CHEMIN);
-        strcat(recup_lignes,"resultat.temp");
+        for(i=0;i<nb_lignes;i++)
+        {
+          fscanf(ptr_fic,"%d",&ligne); //On récupère le numero de la ligne dans la variable ligne.
+
+          sprintf(num_ligne,"%d",ligne);//On transforme ce numéro en un tableau de char.
+
+          if(i==0) //Si c'est la première ligne on la récupère et on l'envoie dans le fichier temporaire resultat.temp
+          {
+            strcpy(recup_lignes,"head ");
+            strcat(recup_lignes,"-");
+            strcat(recup_lignes,num_ligne);
+            strcat(recup_lignes," ");
+            strcat(recup_lignes,CHEMIN2);
+            strcat(recup_lignes,"MotsClesMin | tail -1 > ");
+            strcat(recup_lignes,CHEMIN);
+            strcat(recup_lignes,"resultat.temp");
+          }
+          else //Sinon on l'ajoute à la suite du fichier resultat.temp
+          {
+            strcpy(recup_lignes,"head ");
+            strcat(recup_lignes,"-");
+            strcat(recup_lignes,num_ligne);
+            strcat(recup_lignes," ");
+            strcat(recup_lignes,CHEMIN2);
+            strcat(recup_lignes,"MotsClesMin | tail -1 >> ");
+            strcat(recup_lignes,CHEMIN);
+            strcat(recup_lignes,"resultat.temp");
+          }
+          system(recup_lignes);
+        }
       }
-      else //Sinon on l'ajoute à la suite du fichier resultat.temp
+
+      fclose(ptr_fic);
+
+      if(nb_lignes > 0) //Si le mot se trouve au moins une fois on utilise Compare_mots() pour ne l'afficher qu'une seule fois à l'utilisateur.
       {
-        strcpy(recup_lignes,"head ");
-        strcat(recup_lignes,"-");
-        strcat(recup_lignes,num_ligne);
-        strcat(recup_lignes," ");
-        strcat(recup_lignes,CHEMIN2);
-        strcat(recup_lignes,"MotsClesMin | tail -1 >> ");
-        strcat(recup_lignes,CHEMIN);
-        strcat(recup_lignes,"resultat.temp");
+        Compare_mots();
       }
-      system(recup_lignes);
+      else //Sinon on met nb_mots à 0 (nombre de correspondance au mot saisi)
+      {
+        nb_mots = 0;
+      }
     }
   }
-
-  fclose(ptr_fic);
-
-  if(nb_lignes > 0) //Si le mot se trouve au moins une fois on utilise Compare_mots() pour ne l'afficher qu'une seule fois à l'utilisateur.
-  {
-    Compare_mots();
-  }
-  else //Sinon on met nb_mots à 0 (nombre de correspondance au mot saisi)
+  else
   {
     nb_mots = 0;
   }
-
   vider_buffer();//On vide le buffer pour éviter les saisies parasites.
-}
 }
 
 //On confirme si c'est le bon mot ou non (Quand il n'y a qu'une seule correspondance).
@@ -296,7 +308,7 @@ void Recherche()
     {
       Recherche_extrait(); //On recherche un extrait de mot.
 
-      //Si l'utilisateur a saisi q ou Q pour quitter la recherche
+      //Si l'utilisateur a saisi 0 pour quitter la recherche
       if(mot_cle[0] =='0' && mot_cle[1] == '\0' )
       {
         STOP = 12; //On change la valeur de STOP.
@@ -305,7 +317,14 @@ void Recherche()
 
       if(nb_mots < 1) //Si il n'y a pas de mots correpondant à la saisie
       {
-        printf("\nAucune correspondance.\n");
+        if(atoi(mot_cle) == 0)
+        {
+          printf("\nAucune correspondance.\n");
+        }
+        else
+        {
+          printf("\nErreur de saisie.\n");
+        }
         depart = 1;
       }
 
@@ -336,13 +355,13 @@ void Recherche()
           affichage_mots(CHEMIN,"mots_trouves_depart.temp");
           Recherche_mot_exact(); //On demande de saisir un mot exact pour le chercher.
 
-          if(mot_cle[0] == '0' && mot_cle[1] == '\0' ) //Si l'utilisateur a saisi q ou Q pour quitter la recherche
+          if(mot_cle[0] == '0' && mot_cle[1] == '\0' ) //Si l'utilisateur a saisi 0 pour quitter la recherche
           {
             STOP=12; //On change la valeur de STOP.
             break; // On quitte la boucle de saisie du mot.
           }
 
-          //Si l'utilisateur n'est pas satisfait des propositions il peut lancer une nouvelle recherche en saisissant r ou R.
+          //Si l'utilisateur n'est pas satisfait des propositions il peut lancer une nouvelle recherche en saisissant 1.
           if(mot_cle[0] == '1' && mot_cle[1] == '\0' )
           {
             Recherche();
@@ -351,18 +370,25 @@ void Recherche()
         }
         else if(nb_mots < 1) //Si aucun mot ne correspond exactement à la nouvelle saisie.
         {
-          printf("\nMot inconnu : \n");
+          if(atoi(mot_cle) == 0)
+          {
+            printf("\nMot inconnu.\n");
+          }
+          else
+          {
+            printf("\nErreur de saisie.\n");
+          }
           printf("\nVoici votre précédente recherche : \n");
           affichage_mots(CHEMIN,"mots_trouves_depart.temp");
           Recherche_mot_exact();
 
-          if(mot_cle[0] == '0' && mot_cle[1] == '\0' ) //Si l'utilisateur a saisi q ou Q pour quitter la recherche
+          if(mot_cle[0] == '0' && mot_cle[1] == '\0' ) //Si l'utilisateur a saisi 0 pour quitter la recherche
           {
             STOP=12; //On change la valeur de STOP.
             break; // On quitte la boucle de saisie du mot.
           }
 
-          //Si l'utilisateur n'est pas satisfait des propositions il peut lancer une nouvelle recherche en saisissant r ou R.
+          //Si l'utilisateur n'est pas satisfait des propositions il peut lancer une nouvelle recherche en saisissant 1.
           if(mot_cle[0] == '1' && mot_cle[1] == '\0' )
           {
             Recherche();

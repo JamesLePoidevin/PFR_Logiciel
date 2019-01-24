@@ -30,6 +30,29 @@ void listeDeFichiers1(char *adresseDeBase,char *fichierDArriver){
 	printf("%s\n", 	commande);
 }
 
+char* cheminImage(){
+	//Prend la ligne 8 du fichier
+	system("sed -n \"8 p\" ./Param/param_indexation > adress.temp");
+
+	char* adresse = malloc(128 * sizeof(char));
+
+	//pointeur fichier
+	FILE * ptr_adresse;
+
+	ptr_adresse = fopen("adress.temp","r");
+
+	//si ca c'est bien ouvert
+	if(ptr_adresse != NULL){
+
+		fscanf(ptr_adresse,"%s",adresse);
+	
+	}
+
+	fclose(ptr_adresse);
+
+	return adresse;
+}
+
 //création liste fichiers
 int NomDesFichiers1(char *CHEMIN){
 	listeDeFichiers1(CHEMIN,"adresse");

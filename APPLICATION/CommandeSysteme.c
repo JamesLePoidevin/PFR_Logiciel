@@ -1,9 +1,9 @@
 #include "CommandeSysteme.h"
 
 /**
- * creer un liste des fichier dans un dossier et passe la liste dans un fichier
- * @param adresseDeBase   adresse du dossier a lister les fichier
- * @param fichierDArriver fichier a placer la liste
+ * Crée une liste des fichiers dans un dossier et passe la liste dans un fichier
+ * @param adresseDeBase   adresse du dossier où se trouvent les fichiers
+ * @param fichierDArriver fichier à placer dans la liste
  */
 void listeDeFichiers(char *adresseDeBase,char *fichierDArriver){
 	char commande[1024];
@@ -15,7 +15,7 @@ void listeDeFichiers(char *adresseDeBase,char *fichierDArriver){
 }
 
 /**
- * lire le pourcentage nécessaire pour afficher les fichier 
+ * lit le pourcentage nécessaire pour afficher les fichiers 
  * @return le pourcentage de comparasion
  */
 int lireparametrecompar(){
@@ -40,9 +40,9 @@ int lireparametrecompar(){
 }
 
 /**
- * Compte les mot dans un fichier et place le nombre dans un fichier secondaire
- * @param AdresseDuFichier adresse du fichier a compter
- * @param fichierDArriver  adresse du fichier ou on place le nombre de mot
+ * Compte les mots dans un fichier et place le nombre dans un fichier secondaire
+ * @param AdresseDuFichier adresse du fichier à compter
+ * @param fichierDArriver  adresse du fichier où on place le nombre de mots
  */
 void CompterMot(char *AdresseDuFichier,char *fichierDArriver){
 	char commande[1024];
@@ -55,8 +55,8 @@ void CompterMot(char *AdresseDuFichier,char *fichierDArriver){
 
 
 /**
- * supprime un fichier passer en parametre 
- * @param AdresseDuFichier adresse du fichier a ouvrir
+ * supprime un fichier passer en paramètre 
+ * @param AdresseDuFichier adresse du fichier à ouvrir
  */
 void SupprimerFichier(char *AdresseDuFichier){
 	char commande[1024];
@@ -67,8 +67,8 @@ void SupprimerFichier(char *AdresseDuFichier){
 
 
 /**
- * Ouvre un fichier passer en parametre 
- * @param AdresseDuFichier adresse du fichier a ouvrir
+ * Ouvre un fichier passé en paramètre 
+ * @param AdresseDuFichier adresse du fichier à ouvrir
  */
 void OuvrirFichier(char *AdresseDuFichier){
 	char commande[1024];
@@ -79,7 +79,7 @@ void OuvrirFichier(char *AdresseDuFichier){
 
 
 /**
- * Supprime les fichier en trop/temporaire
+ * Supprime les fichiers en trop/temporaire
  */
 void clean(){
 	remove("NombreDeMotFichier");

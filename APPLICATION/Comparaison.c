@@ -1,13 +1,13 @@
 #include "Comparaison.h"
 
 /**
- * Fonction qui sert a trier le tableau de resultat dans l'ordre croissant
- * très similaire de triTableauResultat avec seul differences le type resultat
- * @param tab    tableau a trier
- * @param taille taille du tableau a trier
+ * Fonction qui sert à trier le tableau des resultats dans l'ordre croissant
+ * Très similaire à triTableauResultat avec comme seule difference le type resultat
+ * @param tab    tableau à trier
+ * @param taille taille du tableau à trier
  */
 void triTableauResultat1(type_resultattext* tab ,int taille){
-//variable pour les for
+//variables pour les for
 	int i, j;
 
 	for (i = 0; i < taille; i++) { //pour chque case du tableau
@@ -26,8 +26,8 @@ void triTableauResultat1(type_resultattext* tab ,int taille){
 }
 
 void ChoixDuFichier(){
-//Déclaration des varible
-	//pointeur fichier pour le fichier avec les nom des fichier et le num de descripteur correspondant
+//Déclaration des variables
+	//pointeur fichier pour le fichier avec les noms des fichiers et le num de descripteur correspondant
 	FILE *ptr_NomDesFichiers; 
 
 	char NomDesFichiers[1024][1024];
@@ -38,20 +38,20 @@ void ChoixDuFichier(){
 	int choix;
 
 	//message de départ
-	printf("Veuillez choisir un des fichiers  \n");
+	printf("Veuillez choisir un des fichiers : \n");
 
 	ptr_NomDesFichiers =fopen("../APPLICATION/FILES/NomDesFichiers","r");
 	
-	//si le fichier existe et peut etre ouvert
+	//si le fichier existe et peut être ouvert
 	if(ptr_NomDesFichiers!=NULL){
 		while(!feof(ptr_NomDesFichiers)){
-			//lire le nom de chaque fichier et le numero de descripteur et les met dans deux tableau au meme indice
+			//lit le nom de chaque fichier et le numero de descripteur et les met dans deux tableaux au même indice
 			fscanf(ptr_NomDesFichiers,"%s %d",NomDesFichiers[indice],&des[indice]);
 
 			//indice égal au nombre de fichiers - 1 pour la case 0
 			indice ++;	 
 		}
-	}else fprintf(stderr, "ERREUR pointeur fichier NomDesFichiers (Comparaison.c l.25)\n" ); //sinon affichier erreur
+	}else fprintf(stderr, "ERREUR pointeur fichier NomDesFichiers (Comparaison.c l.25)\n" ); //sinon afficher erreur
 	fclose(ptr_NomDesFichiers); //fermer le pointeur de fichier
 
 
@@ -62,19 +62,19 @@ void ChoixDuFichier(){
 		printf("[%d] %s\n",i,NomDesFichiers[i]);
 	}
 
-	//sécuriser la saisi pour faire en sorte que l'utilisateur choisi un numero contenu entre 0 et indice
+	//sécuriser la saisie pour faire en sorte que l'utilisateur choisit un numero contenu entre 0 et indice
 	do{
-		//scan les choix entrer au clavier
+		//scan les choix entrés au clavier
 		scanf("%d",&choix);
 
-	}while(choix>indice && choix<=0);	//tant que c'est pas entre 0 et indice
+	}while(choix>indice && choix<=0);	//tant que c'est pas entre 0 et l'indice
 
-system("clear"); //enleve ce qu'il y a sur le terminale
+system("clear"); //enlève ce qu'il y a sur le terminal
 
-printf("Les fichiers qui ont une ressemblence supérieur à 0 pourcent pour le fichier:\n %s\n",NomDesFichiers[choix] );
+printf("Les fichiers qui ont une ressemblance supérieure à 0 pourcent pour le fichier:\n %s\n",NomDesFichiers[choix] );
 
-/*A refaire*/
-//Liste de descripteur
+
+//Liste de descripteurs
 type_des listeDescripteur[indice-2];
 
 for (int i = 0; i < indice-2; i++)
@@ -83,25 +83,25 @@ for (int i = 0; i < indice-2; i++)
 }
 /*Car prend le descripteur*/
 
-//pointeur vers le fichier aves les déscripteur
+//pointeur vers le fichier aves les descripteurs
 FILE *ptr_Descripteur;
 
-//Nouvelle indice avec un descripteur de moins(celui a comparer)
+//Nouvel indice avec un descripteur de moins(celui à comparer)
 int indice1 =indice-1;
 
-//Descripteur auxiliaire pour placer les descrpteur lors de la comparaison
+//Descripteur auxiliaire pour placer les descripteurs lors de la comparaison
 type_des Auxiliaire = init_des();
 
-ptr_Descripteur =fopen("../APPLICATION/FILES/Descripteur","r"); //ouverture du fichier avec les descripteur
-if(ptr_Descripteur!=NULL){	//si le fichier c'est bien ouvert
+ptr_Descripteur =fopen("../APPLICATION/FILES/Descripteur","r"); //ouverture du fichier avec les descripteurs
+if(ptr_Descripteur!=NULL){	//si le fichier s'est bien ouvert
 
-	//tant qu'il y a encore des le fichier Descripteur
+	//tant qu'il y a encore des fichiers Descripteur
 	while(fscanf(ptr_Descripteur,"%d",&Auxiliaire.ref)==1){	//lecture de l'identification du descripteur
 
-		//mis dans la liste de descrpteur a la reference   
+		//mis dans la liste de descripteurs à la reference   
 		listeDescripteur[indice1].ref =Auxiliaire.ref;
 
-		//lecture de chaque mot et leur occerence dans le fichier et placer dans un type_des auxiliaire
+		//lit chaque mot et son occurence dans le fichier et le place dans un type_des auxiliaire
 	for (int i = 0; i < recuperer_Valuer_Descripteur(); i++){	
 		fscanf(ptr_Descripteur,"%1023s%d",Auxiliaire.tab[i].mot,&Auxiliaire.tab[i].occurence);
 	}

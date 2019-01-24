@@ -116,8 +116,43 @@ int calculeSimilitudeNB(PILENB P1,type_resultat* res,type_descNB A){
 	return ind;
 }
 
+
 void ouvrirImageNB(char * nom){
-	char chemin;
+	char nomFic[50];
+	char chemin[150];
+	strcpy(nomFic,nom);
+	
+
+	char * mot = strtok(nomFic,".");	
+	strcat(mot,".bmp");
+
+	printf("MOT =%s\n",mot );
+
+	strcpy(chemin,"feh ");
+	strcat(chemin,cheminImage());
+	strcat(chemin,mot);
+	strcat(chemin," &");
+
+	system(chemin);
+}
+
+void ouvrirImageRGB(char * nom){
+	char nomFic[50];
+	char chemin[150];
+	strcpy(nomFic,nom);
+	
+
+	char * mot = strtok(nomFic,".");	
+	strcat(mot,".jpg");
+
+	printf("MOT =%s\n",mot );
+
+	strcpy(chemin,"feh ");
+	strcat(chemin,cheminImage());
+	strcat(chemin,mot);
+	strcat(chemin," &");
+
+	system(chemin);
 }
 
 void compair(int choix){
@@ -206,6 +241,38 @@ if(NB == 1){	//si le fichier a comparer est Noir et blance
 			}
 		}
 	}
+
+	int boolean;
+		do{
+		printf("Quel fichier voulez vous visualisez ? [0] pour quitter \n");
+
+		do{
+			//lit le choix de l'utilisateur
+		scanf("%d",&boolean);
+
+		}while(boolean !=0 && boolean > indice-6);
+		if(boolean != 0){
+
+			//affichage du texte choisi
+			int choix1;
+
+			for (int i = 0; i < indice-1; i++){
+				if(choix == des[i]){
+					choix1 = i;
+				}
+			}
+			printf("%d\n", choix1);
+
+			ouvrirImageNB(NomDesFichiers[choix1]);
+			for (int i = 0; i < indice-1; i++){
+				if (des[i]==res[boolean-1].id){
+					ouvrirImageNB(NomDesFichiers[i]);
+			}
+		}
+		}
+	}while(boolean != 0);
+
+
 }else		//si l'image a comparer est rouge vert et bleu
 {
 	//ouverture du fichier avec les descripteur RGB
@@ -281,6 +348,37 @@ if(NB == 1){	//si le fichier a comparer est Noir et blance
 			}
 		}
 	}
+
+	int boolean;
+	
+		do{
+		printf("Quel fichier voulez vous visualisez ? [0] pour quitter \n");
+
+		do{
+			//lit le choix de l'utilisateur
+		scanf("%d",&boolean);
+
+		}while(boolean !=0 && boolean > indice-6);
+		if(boolean != 0){
+
+			//affichage du texte choisi
+			int choix1;
+
+			for (int i = 0; i < indice-1; i++){
+				if(choix == des[i]){
+					choix1 = i;
+				}
+			}
+			printf("%d\n", choix1);
+
+			ouvrirImageRGB(NomDesFichiers[choix1]);
+			for (int i = 0; i < indice-1; i++){
+				if (des[i]==res[boolean-1].id){
+					ouvrirImageRGB(NomDesFichiers[i]);
+			}
+		}
+		}
+	}while(boolean != 0);
 }
 }
 

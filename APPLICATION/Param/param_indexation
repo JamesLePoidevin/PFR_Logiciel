@@ -5,6 +5,6 @@ Nombre de bits dans la quantification:
 Chemin d'accès pour les fichiers texte:
 ../Textes/
 Chemin d'accès pour les fichiers images noir et blanc:
-/Samples
+../IMAGE/
 Chemin d'accès pour les fichiers images couleurs:
 /Samples/Images/Couleurs*

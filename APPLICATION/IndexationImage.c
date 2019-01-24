@@ -23,13 +23,14 @@ int NomDesFichiersImage(char *CHEMIN){
 		if( ptr_fic != NULL){
         fscanf( ptr_fic, "%*s %*s");      /* SAUTER LA PREMIERE LIGNE CONSTITUEE DE 2 CHAINES total xxxx */
 
-        fscanf(ptr_fic, "%*s %*s %*s %*s %*s %*s %*s %*s %s", NomDuFichier);  /* %*s INGNORE LA CHAINE LUE */
-			while ( !feof(ptr_fic) )
+        //fscanf(ptr_fic, "%*s %*s %*s %*s %*s %*s %*s %*s %s", NomDuFichier);  /* %*s INGNORE LA CHAINE LUE */
+			while ( fscanf( ptr_fic, "%*s %*s %*s %*s %*s %*s %*s %*s %s", NomDuFichier) == 1)
 			{
-				IndiceDesNom++;
-				fscanf( ptr_fic, "%*s %*s %*s %*s %*s %*s %*s %*s %s", NomDuFichier);
+				
+				//fscanf( ptr_fic, "%*s %*s %*s %*s %*s %*s %*s %*s %s", NomDuFichier);
 				fprintf(ptr_fichier, "%s %d\n", NomDuFichier,IndiceDesNom);
-			}
+			  IndiceDesNom++;
+      }
 			fclose(ptr_fic);
 			fclose(ptr_fichier);
 		}else fprintf(stderr, "ERREUR :  PB avec liste_rep\n");

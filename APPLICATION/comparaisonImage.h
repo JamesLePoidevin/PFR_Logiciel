@@ -15,3 +15,7 @@ float min(float a , float b);
 void triTableauResultat(type_resultat* res ,int taille);
 
 void compair(int choix);
+
+void ouvrirImageNB(char * nom);
+
+void ouvrirImageRGB(char * nom);

@@ -199,18 +199,18 @@ printf("Voici la liste des fichiers dans l'ordre:\n");
 	
 	int boolean;
 	
-	//Menu d'affichage de des possibilité
+	//Menu d'affichage des possibilités
 	do{
-		printf("Quel fichier voulez vous visualisez ? [0] pour quitter \n");
+		printf("Quel fichier voulez-vous visualiser ? [0] pour quitter \n");
 
 		do{
 			//lit le choix de l'utilisateur
 		boolean = test_entier1();
 
-		}while(boolean !=0 || boolean < nbFichierAfficher);
+		}while(boolean !=0 && boolean > nbFichierAfficher);
 		if(boolean != 0){
 
-			printf("test\n");
+			//printf("test\n");
 			//affichage du texte choisi
 			char *commande = malloc(1000 * sizeof(char));
 			strcpy(commande , "cat ");

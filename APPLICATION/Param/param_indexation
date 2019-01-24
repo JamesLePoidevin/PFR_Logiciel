@@ -3,8 +3,6 @@ Nombre de mots pour les descripteurs:
 Nombre de bits dans la quantification:
 2
 Chemin d'accès pour les fichiers texte:
-../Textes/
-Chemin d'accès pour les fichiers images noir et blanc:
+../TEXTES/
+Chemin d'accès pour les fichiers image:
 ../IMAGE/
-Chemin d'accès pour les fichiers images couleurs:
-/Samples/Images/Couleurs*

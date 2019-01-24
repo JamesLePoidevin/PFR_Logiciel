@@ -28,7 +28,7 @@ int AffichageFichier(){
 	int des[1024];
 
 
-	int indice;
+	int indice =0;
 	int choix;
 
 	
@@ -54,7 +54,7 @@ int AffichageFichier(){
 		printf("[%d] %s\n",i,NomDesFichiers[i]);
 	}
 
-	printf("Veuillez choisir un des fichiers en entrant le numéro de gauche");
+	printf("Veuillez choisir un des fichiers en entrant le numéro de gauche : ");
 
 
 	do{ 
@@ -265,7 +265,7 @@ if(NB == 1){	//si le fichier a comparer est Noir et blance
 	int boolean;
 		do{
 		do{
-			printf("\nQuel fichier voulez vous visualisez?\nVeuillez rentrer le numero à gauche\n 0 pour quitter \n");
+			printf("\nQuel fichier voulez-vous visualiseR?\nVeuillez rentrer le numero à gauche \n [0] pour quitter \n");
 
 		//lit le choix de l'utilisateur
 		boolean = test_entier();
@@ -379,7 +379,7 @@ if(NB == 1){	//si le fichier a comparer est Noir et blance
 
 		do{
 
-			printf("\nQuel fichier voulez vous visualisez?\n Veuillez rentrer le numero à gauche\n 0 pour quitter \n");
+			printf("\nQuel fichier voulez vous visualiser?\n Veuillez rentrer le numero à gauche : \n [0] pour quitter \n");
 			//lit le choix de l'utilisateur
 			
 		boolean = test_entier();

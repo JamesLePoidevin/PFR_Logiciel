@@ -26,11 +26,11 @@ void menu()
 
   do
   {
-    printf("Veuillez choisir un mode, (1) utilisateur ou (2) administrateur : \n");
+    printf("Veuillez choisir un mode: (1)Utilisateur (2)Administrateur (3)Quitter le programme \n");
     mode = test_int();
     //scanf("%d",&mode);
 
-  }while( mode != 1 && mode !=2);
+  }while( mode != 1 && mode !=2 && mode !=3);
 
   switch (mode)
   {
@@ -38,13 +38,12 @@ void menu()
       menu_user();
       break;
 
-    case 2 : printf("Vous avez choisi le mode administrateur\n");
+    case 2 :
       menu_admin();
-
-    break;
+      break;
 
     default :
-    break;
+      break;
   }
 }
 

@@ -15,7 +15,7 @@ void Recherche_par_mot_cle()
   {
     do //On demande s'il veut effectuer une nouvelle recherche tant qu'il ne fait pas une saisie correcte.
     {
-      printf("\nVoulez vous effectuer une nouvelle recherche ? (1)OUI ,(2)NON : ");
+      printf("\nVoulez-vous effectuer une nouvelle recherche ? (1)OUI (2)NON : ");
 
       if(scanf("%d",&choix) != 1) //Si la saisie n'est pas un entier, on affiche un message d'erreur.
       {

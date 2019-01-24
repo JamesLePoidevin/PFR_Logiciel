@@ -304,7 +304,7 @@ void chemin_texte(){
   system(commande);
 }
 
-//Chemin d'accès des images noir et blanc
+//Chemin d'accès des images
 void chemin_image_nb(){
   system("clear");
   char* ch_img_nb;
@@ -318,7 +318,7 @@ void chemin_image_nb(){
   system(commande);
 }
 
-
+/*
 //Chemin d'accès des images couleur
 void chemin_image_coul(){
   system("clear");
@@ -332,10 +332,11 @@ void chemin_image_coul(){
   strcat(commande,"#' Param/param_indexation");
   system(commande);
 }
+*/
 
 //Menu modification chemins (choix entre texte, image noir et blanc, image couleur)
 void menu_chemins(){
-  printf("Menu modification des chemins:\n1-Chemin pour les fichiers texte\n2-Chemin pour les fichiers image noir et blanc\n3-Chemin pour les fichiers image couleur\n4-Retour au Mode administrateur\n5-Quitter le programme\n");
+  printf("Menu modification des chemins:\n1-Chemin pour les fichiers texte\n2-Chemin pour les fichiers image \n3-Retour au Mode administrateur\n4-Quitter le programme\n");
   int n;
   n = test_int();
 
@@ -347,21 +348,15 @@ void menu_chemins(){
       menu_chemins();
       break;
     case 2 :
-      chemin_image_nb(); //Ce choix permet de changer le chemin des fichiers image noir et blanc
+      chemin_image_nb(); //Ce choix permet de changer le chemin des fichiers image
       system("clear");
       printf("\nLe chemin a été modifié avec succès.\n");
       menu_chemins();
       break;
     case 3 :
-      chemin_image_coul(); //Ce choix permet de changer le chemin des fichiers image couleur
-      system("clear");
-      printf("\nLe chemin a été modifié avec succès.\n");
-      menu_chemins();
-      break;
-    case 4 :
       menu_admin();  //Ce choix permet de retourner au mode administrateur
       break;
-    case 5 :
+    case 4 :
       return;
       break;
     default :
@@ -370,7 +365,7 @@ void menu_chemins(){
       menu_chemins();
     }
     system("clear");
-    printf("Le fichier a été modifié avec succès.\n");
+    //printf("Le fichier a été modifié avec succès.\n");
 }
 
 //MENU GÉNÉRAL DU MODE CONFIGURATION

@@ -143,9 +143,9 @@ void Recherche_extrait()
 {
   char recherche[1000];//Contiendra la commande pour rechercher le mot saisi.
 
-  printf("\nSaisir un mot (q pour Quitter) : ");
+  printf("\nSaisir un mot (0 pour Quitter) : ");
   scanf("%s",mot_cle); //On récupère la saisie dans mot_cle (déclaré dans traiter_mot_cle.h)
-
+  if(mot_cle[0] != '0'){
   //On récupère dans le fichier temporaire resultat.temp tous les mots contenant la saisie de l'utilisateur.
   strcpy(recherche, "grep -i ");
   strcat(recherche,mot_cle);
@@ -158,7 +158,7 @@ void Recherche_extrait()
   system(recherche);
 
   Compare_mots(); //On lance la comparaison du resultat pour proposer à l'utilisateur une seule fois chaque correspondance.
-
+}
   vider_buffer();//On vide le buffer de saisie pour être sûr qu'il ne reste pas de saisie parasite.
 }
 
@@ -171,8 +171,9 @@ void Recherche_mot_exact()
   char recherche[1000];//Contiendra la commande pour rechercher le mot exact saisi.
   char recup_lignes[1000];//Contiendra la commande permettant de récupérer dans le fichier MotsClesMin les lignes correspondant à la recherche.
 
-  printf("\nSaisir un mot complet (q pour Quitter, r pour une nouvelle recherche): ");
+  printf("\nSaisir un mot complet (0 pour Quitter, 1 pour une nouvelle recherche): ");
   scanf("%s",mot_cle);
+  if (mot_cle[0] != '0' && mot_cle[0]!='1'){
 
   //On regarde dans la liste des mots cles sans leurs descripteurs les lignes correspondants exactement à la recherche en récupérant aussi leur numéro de ligne.
   //Ensuite on garde uniquement les numéros de lignes.
@@ -236,7 +237,7 @@ void Recherche_mot_exact()
   }
 
   vider_buffer();//On vide le buffer pour éviter les saisies parasites.
-
+}
 }
 
 //On confirme si c'est le bon mot ou non (Quand il n'y a qu'une seule correspondance).
@@ -244,7 +245,7 @@ void confirmation()
 {
   int validation; //variable contenant la confirmation de l'utilisateur;.
 
-  printf("\nVoulez vous cherchez ce mot : (1) OUI, (2) NON, (3) QUITTER\n");
+  printf("\nVoulez-vous chercher ce mot ? (1)OUI (2)NON (3)Quitter la recherche\n");
 
   if(scanf("%d",&validation) != 1) //Si l'utilisateur saisit autre chose qu'un entier on affiche un message d'erreur.
   {
@@ -267,6 +268,7 @@ void confirmation()
       case 3 : STOP = 12; // On active le STOP pour quitter la recherche par mot_clé si l'utilisateur saisi 3.
                boucle = 200; //On sort de la boucle (où se trouve confirmation()) située dans la fonction Recherche() plus bas.
                vider_buffer(); //On vide le buffer
+               return;
                break;
 
       default : printf("\nJe n'ai pas compris, veuillez taper 1 ou 2\n"); //Sinon on affiche un message d'erreur.
@@ -295,7 +297,7 @@ void Recherche()
       Recherche_extrait(); //On recherche un extrait de mot.
 
       //Si l'utilisateur a saisi q ou Q pour quitter la recherche
-      if((mot_cle[0] == 'q' || mot_cle[0] == 'Q') && mot_cle[1] == '\0' )
+      if(mot_cle[0] =='0' && mot_cle[1] == '\0' )
       {
         STOP = 12; //On change la valeur de STOP.
         break; //On quitte la boucle de saisie du mot
@@ -334,14 +336,14 @@ void Recherche()
           affichage_mots(CHEMIN,"mots_trouves_depart.temp");
           Recherche_mot_exact(); //On demande de saisir un mot exact pour le chercher.
 
-          if((mot_cle[0] == 'q' || mot_cle[0] == 'Q') && mot_cle[1] == '\0' ) //Si l'utilisateur a saisi q ou Q pour quitter la recherche
+          if(mot_cle[0] == '0' && mot_cle[1] == '\0' ) //Si l'utilisateur a saisi q ou Q pour quitter la recherche
           {
             STOP=12; //On change la valeur de STOP.
             break; // On quitte la boucle de saisie du mot.
           }
 
           //Si l'utilisateur n'est pas satisfait des propositions il peut lancer une nouvelle recherche en saisissant r ou R.
-          if((mot_cle[0] == 'r' || mot_cle[0] == 'R') && mot_cle[1] == '\0' )
+          if(mot_cle[0] == '1' && mot_cle[1] == '\0' )
           {
             Recherche();
             break; //On quitte la boucle de saisie du mot.
@@ -350,18 +352,18 @@ void Recherche()
         else if(nb_mots < 1) //Si aucun mot ne correspond exactement à la nouvelle saisie.
         {
           printf("\nMot inconnu : \n");
-          printf("\nVoici votre precedente recherche : \n");
+          printf("\nVoici votre précédente recherche : \n");
           affichage_mots(CHEMIN,"mots_trouves_depart.temp");
           Recherche_mot_exact();
 
-          if((mot_cle[0] == 'q' || mot_cle[0] == 'Q') && mot_cle[1] == '\0' ) //Si l'utilisateur a saisi q ou Q pour quitter la recherche
+          if(mot_cle[0] == '0' && mot_cle[1] == '\0' ) //Si l'utilisateur a saisi q ou Q pour quitter la recherche
           {
             STOP=12; //On change la valeur de STOP.
             break; // On quitte la boucle de saisie du mot.
           }
 
           //Si l'utilisateur n'est pas satisfait des propositions il peut lancer une nouvelle recherche en saisissant r ou R.
-          if((mot_cle[0] == 'r' || mot_cle[0] == 'R') && mot_cle[1] == '\0' )
+          if(mot_cle[0] == '1' && mot_cle[1] == '\0' )
           {
             Recherche();
             break; //On quitte la boucle de saisie du mot.

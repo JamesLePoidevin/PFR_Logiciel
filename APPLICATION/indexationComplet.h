@@ -1,5 +1,7 @@
 #include "TriFichier.h"
 
+
+int test_entier1();
 void enleverPointEtVirgule(char* mot);
 void enleverAppostrophe(char* mot);
 void enleverParenthese(char * mot);

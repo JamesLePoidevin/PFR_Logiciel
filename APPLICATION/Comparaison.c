@@ -38,7 +38,7 @@ void ChoixDuFichier(){
 	int choix;
 
 	//message de départ
-	printf("Veuillez choisir un des fichiers : \n");
+	
 
 	ptr_NomDesFichiers =fopen("../APPLICATION/FILES/NomDesFichiers","r");
 	
@@ -64,20 +64,21 @@ void ChoixDuFichier(){
 
 	//sécuriser la saisie pour faire en sorte que l'utilisateur choisit un numero contenu entre 0 et indice
 	do{
+		printf("\nVeuillez choisir un des fichiers en entrant un des numéros de gauche : \n");
 		//scan les choix entrés au clavier
-		scanf("%d",&choix);
+		choix = test_entier1();
 
-	}while(choix>indice && choix<=0);	//tant que c'est pas entre 0 et l'indice
+	}while(choix>indice || choix<=0);	//tant que c'est pas entre 0 et l'indice
 
 system("clear"); //enlève ce qu'il y a sur le terminal
 
-printf("Les fichiers qui ont une ressemblance supérieure à 0 pourcent pour le fichier:\n %s\n",NomDesFichiers[choix] );
+printf("Les fichiers qui ont une ressemblance supérieure au seuil parametré:\n %s\n",NomDesFichiers[choix] );
 
 
 //Liste de descripteurs
-type_des listeDescripteur[indice-2];
+type_des listeDescripteur[indice];
 
-for (int i = 0; i < indice-2; i++)
+for (int i = 0; i < indice-1; i++)
 {
 	listeDescripteur[i] = init_des();
 }
@@ -87,7 +88,7 @@ for (int i = 0; i < indice-2; i++)
 FILE *ptr_Descripteur;
 
 //Nouvel indice avec un descripteur de moins(celui à comparer)
-int indice1 =indice-1;
+int indice1 =indice-2;
 
 //Descripteur auxiliaire pour placer les descripteurs lors de la comparaison
 type_des Auxiliaire = init_des();
@@ -109,7 +110,7 @@ if(ptr_Descripteur!=NULL){	//si le fichier s'est bien ouvert
 		//mis de chque mot et leur occuence dans la liste de descrpteur
 	for (int i = 0; i < recuperer_Valuer_Descripteur(); i++){
 		strcpy(listeDescripteur[indice1].tab[i].mot,Auxiliaire.tab[i].mot);
-		listeDescripteur[indice1].tab[i].occurence =Auxiliaire.tab[i].occurence ; 
+		listeDescripteur[indice1].tab[i].occurence =Auxiliaire.tab[i].occurence;
 	}
 
 		//on diminue l'indice pour arriver a 0
@@ -204,9 +205,9 @@ printf("Voici la liste des fichiers dans l'ordre:\n");
 
 		do{
 			//lit le choix de l'utilisateur
-		scanf("%d",&boolean);
+		boolean = test_entier1();
 
-		}while(boolean !=0 && boolean > nbFichierAfficher);
+		}while(boolean !=0 || boolean < nbFichierAfficher);
 		if(boolean != 0){
 
 			printf("test\n");
@@ -222,12 +223,5 @@ printf("Voici la liste des fichiers dans l'ordre:\n");
 		}
 	}while(boolean != 0);
 
-for (int i = 0; i < indice; i++)
-{
-	for (int j = 0; j < recuperer_Valuer_Descripteur(); j++)
-	{
-		free(listeDescripteur[i].tab[j].mot);
-	}
-}
 
 }

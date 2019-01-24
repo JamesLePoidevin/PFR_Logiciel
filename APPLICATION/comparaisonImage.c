@@ -1,5 +1,18 @@
 #include "comparaisonImage.h"
 
+int test_entier(){      // cas où on souhaite un entier ou un float
+  char nombre[50] = "";
+  int num = 0;
+  char zero[] = "0";
+
+  scanf("%s", nombre);
+
+  if (atoi(nombre) == 0 && strcmp(zero, nombre) != 0){
+    return -1;
+  }
+  else return atoi(nombre);
+}
+
 /**
  * Focntion qui affiche tous les fichier possible pour la comparaison
  * @return renvoi le numero de descripteur correspondant au choix fait par l'utilisateur
@@ -18,7 +31,7 @@ int AffichageFichier(){
 	int indice;
 	int choix;
 
-	printf("Veuillez choisir un des fichiers  \n");
+	
 	ptr_NomDesFichiers =fopen("../APPLICATION/FILES/NomDesFichiersImage","r");
 	if(ptr_NomDesFichiers!=NULL){
 
@@ -41,11 +54,13 @@ int AffichageFichier(){
 		printf("[%d] %s\n",i,NomDesFichiers[i]);
 	}
 
+	printf("Veuillez choisir un des fichiers en entrant le numéro de gauche");
+
 
 	do{ 
 
 		//Lit la valeur saisi par l'utilisateur
-		scanf("%d",&choix);
+		choix = test_entier();
 
 	}while(choix>indice || choix <0); //tantqu'il est superieur au nombre de fichier et inferieur a 0
 
@@ -126,8 +141,6 @@ void ouvrirImageNB(char * nom){
 	char * mot = strtok(nomFic,".");	
 	strcat(mot,".bmp");
 
-	printf("MOT =%s\n",mot );
-
 	strcpy(chemin,"feh ");
 	strcat(chemin,cheminImage());
 	strcat(chemin,mot);
@@ -144,8 +157,6 @@ void ouvrirImageRGB(char * nom){
 
 	char * mot = strtok(nomFic,".");	
 	strcat(mot,".jpg");
-
-	printf("MOT =%s\n",mot );
 
 	strcpy(chemin,"feh ");
 	strcat(chemin,cheminImage());
@@ -232,25 +243,34 @@ if(NB == 1){	//si le fichier a comparer est Noir et blance
 	//l'ordre décroissant
 	triTableauResultat(res,ind);
 
+	for (int i = 0; i < nbrNB; i++)
+	{
+		printf("%d %d \n",res[i].id,res[i].sim );
+	}
+
+	system("clear");
+
+	int in = 1;
 	//Affichage dans l'ordre décroissant 
 	printf("Voici la liste des fichiers dans l'ordre:\n");
 	for (int j = ind-1; j >ind-6 ; j--){
 		for (int i = 0; i < indice-1; i++){
 			if (des[i]==res[j].id){
-				printf("%s %d\n",NomDesFichiers[i],res[j].sim);
+				printf("[%d] %s %d\n",in,NomDesFichiers[i],res[j].sim);
+				in ++;
 			}
 		}
 	}
 
 	int boolean;
 		do{
-		printf("Quel fichier voulez vous visualisez ? [0] pour quitter \n");
-
 		do{
-			//lit le choix de l'utilisateur
-		scanf("%d",&boolean);
+			printf("\nQuel fichier voulez vous visualisez?\nVeuillez rentrer le numero à gauche\n 0 pour quitter \n");
 
-		}while(boolean !=0 && boolean > indice-6);
+		//lit le choix de l'utilisateur
+		boolean = test_entier();
+
+		}while(boolean < 0 || boolean > 6);
 		if(boolean != 0){
 
 			//affichage du texte choisi
@@ -264,8 +284,9 @@ if(NB == 1){	//si le fichier a comparer est Noir et blance
 			printf("%d\n", choix1);
 
 			ouvrirImageNB(NomDesFichiers[choix1]);
+
 			for (int i = 0; i < indice-1; i++){
-				if (des[i]==res[boolean-1].id){
+				if (des[i]==res[ind-boolean].id){
 					ouvrirImageNB(NomDesFichiers[i]);
 			}
 		}
@@ -333,18 +354,20 @@ if(NB == 1){	//si le fichier a comparer est Noir et blance
 		ind ++;
 	}
 
-
+	system("clear");
 	//Tri du tableau des resultats par ordre croissant pour être affiché dans
 	//l'ordre décroissant
 	triTableauResultat(res,ind);
+
+	int in = 1;
 
 	//Affichage dans l'ordre décroissant 
 	printf("Voici la liste des fichiers dans l'ordre:\n");
 	for (int j = ind-1; j >ind-6 ; j--){
 		for (int i = 0; i < indice-1; i++){
 			if (des[i]==res[j].id){
-				printf("%s %d\n",NomDesFichiers[i],res[j].sim);
-
+				printf("[%d] %s %d\n",in,NomDesFichiers[i],res[j].sim);
+				in ++;
 			}
 		}
 	}
@@ -352,13 +375,16 @@ if(NB == 1){	//si le fichier a comparer est Noir et blance
 	int boolean;
 	
 		do{
-		printf("Quel fichier voulez vous visualisez ? [0] pour quitter \n");
+		
 
 		do{
-			//lit le choix de l'utilisateur
-		scanf("%d",&boolean);
 
-		}while(boolean !=0 && boolean > indice-6);
+			printf("\nQuel fichier voulez vous visualisez?\n Veuillez rentrer le numero à gauche\n 0 pour quitter \n");
+			//lit le choix de l'utilisateur
+			
+		boolean = test_entier();
+
+		}while(boolean < 0 || boolean > 6);
 		if(boolean != 0){
 
 			//affichage du texte choisi
@@ -373,7 +399,7 @@ if(NB == 1){	//si le fichier a comparer est Noir et blance
 
 			ouvrirImageRGB(NomDesFichiers[choix1]);
 			for (int i = 0; i < indice-1; i++){
-				if (des[i]==res[boolean-1].id){
+				if (des[i]==res[ind-boolean].id){
 					ouvrirImageRGB(NomDesFichiers[i]);
 			}
 		}

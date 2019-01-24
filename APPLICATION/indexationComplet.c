@@ -2,6 +2,20 @@
 
 char* Chemin_text = "../Textes/";
 
+
+int test_entier1(){      // cas où on souhaite un entier ou un float
+  char nombre[50] = "";
+  int num = 0;
+  char zero[] = "0";
+
+  scanf("%s", nombre);
+
+  if (atoi(nombre) == 0 && strcmp(zero, nombre) != 0){
+    return -1;
+  }
+  else return atoi(nombre);
+}
+
 /**Verifie si le mot passer en parametre contien un point ou virgule
  * @param mot à traiter
  */ 

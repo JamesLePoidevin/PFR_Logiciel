@@ -6,13 +6,14 @@ char CHEMIN_NB [100] =  "../TEST_NB/";
 void lecture_image(FILE* ptr_fil,int ligne,int colonne,float tab[2]){
 	int x;
 	if(ptr_fil!=NULL){
-		while(fscanf(ptr_fil,"%d ",&x)==1){
+		while(fscanf(ptr_fil,"%d",&x)==1){
 			if (x==0)
 			{
 				tab[0]+=1;
 			}else
 			tab[1]+=1;
 		}
+		printf("tab0= %f  tab1= %f \n", tab[0], tab[1]);
 		//tab[0]=tab[0];
 		//tab[1]=tab[1]/(ligne*colonne))*100;
 	}

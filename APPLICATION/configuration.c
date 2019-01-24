@@ -1,17 +1,17 @@
 #include "configuration.h"
 
 
-int test_pourcentage(){      // cas où on souhaite un entier ou un float
+float test_pourcentage(){      // cas où on souhaite un entier ou un float
   char nombre[50] = "";
   int num = 0;
   char zero[] = "0";
 
   scanf("%s", nombre);
 
-  if (atoi(nombre) == 0 && strcmp(zero, nombre) != 0){
+  if (atof(nombre) == 0 && strcmp(zero, nombre) != 0){
     return 150;
   }
-  else return atoi(nombre);
+  else return atof(nombre);
 }
 
 
@@ -33,7 +33,6 @@ void affiche_descripteur_image_coul(){
   system("clear");
   system("cat ./FILES/DescripteurImageRGB");
 }
-//ATTENTION A LA LOCALISATION DES DESCRIPTEURS IMAGES
 
 //MENU VISUALISER DESCRIPTEURS
 void menu_descripteur(){
@@ -74,7 +73,7 @@ void menu_descripteur(){
 
 //PARAMETRAGE RECHERCHE
 void param_recherche_texte(){
-  //system("clear");
+  system("clear");
   printf("\n1-Changer les paramètres de recherche\n2-Retour au Mode administrateur\n");
   int n;
   n = test_int();
@@ -94,12 +93,11 @@ void param_recherche_texte(){
     char commande[1024];
     strcpy(commande,"sed -i '2s/.*/"); //Suppression de la deuxième ligne du fichier param_recherche.txt
     strcat(commande, nbr_mots_txt_char);
-    strcat(commande,"/'  Param/param_recherche.txt"); //Remplacement de la deuxième ligne du fichier param_recherche.txt, avec le nouveau nombre
+    strcat(commande,"/'  Param/param_recherche"); //Remplacement de la deuxième ligne du fichier param_recherche.txt, avec le nouveau nombre
     system(commande);
     system("clear");
     printf("\nLes paramètres de recherche ont été modifiés avec succès.\n");
     param_recherche_texte();
-    //ATTENTION A L'EMPLACEMENT DE param_recherche.txt
   }
   else if(n==2){
     system("clear");
@@ -130,14 +128,14 @@ void param_compar_texte(){
   char commande[1024];
   strcpy(commande,"sed -i '2s/.*/"); //Suppression de la deuxième ligne du fichier param_comparaison.txt
   strcat(commande, seuil_compar_char);
-  strcat(commande,"/'  Param/param_comparaison.txt"); //Remplacement de la deuxième ligne du fichier param_comparaison.txt, avec le nouveau seuil
+  strcat(commande,"/'  Param/param_comparaison"); //Remplacement de la deuxième ligne du fichier param_comparaison.txt, avec le nouveau seuil
+  printf("%s",commande);
   system(commande);
-  //ATTENTION A L'EMPLACEMENT DE param_comparaison.txt
 }
 
 //Images Noir et Blanc
 void param_compar_img_nb(){
-  system("clear");
+  //system("clear");
   char seuil_compar_img_nb_char[50];
   float seuil_compar_img_nb;
   do {
@@ -152,9 +150,8 @@ void param_compar_img_nb(){
   char commande[1024];
   strcpy(commande,"sed -i '4s/.*/"); //Suppression de la quatrième ligne du fichier param_comparaison.txt
   strcat(commande, seuil_compar_img_nb_char);
-  strcat(commande,"/'  Param/param_comparaison.txt"); //Remplacement de la quatrième ligne du fichier param_comparaison.txt, avec le nouveau seuil
+  strcat(commande,"/'  Param/param_comparaison"); //Remplacement de la quatrième ligne du fichier param_comparaison.txt, avec le nouveau seuil
   system(commande);
-  //ATTENTION A L'EMPLACEMENT DE param_comparaison.txt
 }
 
 //Images Couleur
@@ -174,9 +171,8 @@ void param_compar_img_coul(){
   char commande[1024];
   strcpy(commande,"sed -i '6s/.*/"); //Suppression de la sixième ligne du fichier param_comparaison.txt
   strcat(commande, seuil_compar_img_coul_char);
-  strcat(commande,"/'  Param/param_comparaison.txt"); //Remplacement de la sixième ligne du fichier param_comparaison.txt, avec le nouveau seuil
+  strcat(commande,"/'  Param/param_comparaison"); //Remplacement de la sixième ligne du fichier param_comparaison.txt, avec le nouveau seuil
   system(commande);
-  //ATTENTION A L'EMPLACEMENT DE param_comparaison.txt
 }
 
 //Menu pour comparaison
@@ -237,10 +233,8 @@ void param_index_texte(){
   char commande[1024];
   strcpy(commande,"sed -i '2s/.*/"); //Suppression de la deuxième ligne du fichier param_indexation.txt
   strcat(commande, nbr_mots_char);
-  strcat(commande,"/'  Param/param_indexation.txt"); //Remplacement de la deuxième ligne du fichier param_indexation.txt, avec le nouveau nombre
+  strcat(commande,"/'  Param/param_indexation"); //Remplacement de la deuxième ligne du fichier param_indexation.txt, avec le nouveau nombre
   system(commande);
-  // PENSEZ A VOIR SI LE NOMBRE DE MOTS DANS LE DESCRIPTEUR POSE PROBLEME S'IL EST TROP GRAND
-  //ATTENTION A L'EMPLACEMENT DE param_indexation.txt
 }
 
 //Image
@@ -259,9 +253,8 @@ void param_index_image(){
   char commande[1024];
   strcpy(commande, "sed -i '4s/.*/"); //Suppression de la quatrième ligne du fichier param_indexation.txt
   strcat(commande, nbr_bits_char);
-  strcat(commande,"/' Param/param_indexation.txt"); //Remplacement de la quatrième ligne du fichier param_indexation.txt, avec le nouveau nombre
+  strcat(commande,"/' Param/param_indexation"); //Remplacement de la quatrième ligne du fichier param_indexation.txt, avec le nouveau nombre
   system(commande);
-  //ATTENTION A L'EMPLACEMENT DE param_indexation.txt
 }
 
 //Menu indexation (choix entre texte ou image)
@@ -296,7 +289,7 @@ void menu_index(){
   printf("Le fichier a été modifié avec succès.\n");
 }
 
-//ATTENTION POUR TOUS LES CHEMINS: PROBLEME AVEC LA GESTION DU SLASH ET DES ESPACES
+
 //Chemin d'accès des textes
 void chemin_texte(){
   system("clear");
@@ -307,9 +300,8 @@ void chemin_texte(){
   scanf("%s", ch_txt);
   strcpy(commande, "sed -i '6s#.*#");
   strcat(commande, ch_txt);
-  strcat(commande,"#' Param/param_indexation.txt");
+  strcat(commande,"#' Param/param_indexation");
   system(commande);
-  //ATTENTION A LA GESTION DE LA TAILLE DU CHEMIN (SI TROP GRAND ET SAUTE UNE LIGNE (SUPPRESSION D'UNE LIGNE))
 }
 
 //Chemin d'accès des images noir et blanc
@@ -322,10 +314,10 @@ void chemin_image_nb(){
   scanf("%s", ch_img_nb);
   strcpy(commande, "sed -i '8s#.*#");
   strcat(commande, ch_img_nb);
-  strcat(commande,"#' Param/param_indexation.txt");
+  strcat(commande,"#' Param/param_indexation");
   system(commande);
-  //ATTENTION A LA GESTION DE LA TAILLE DU CHEMIN (SI TROP GRAND ET SAUTE UNE LIGNE (SUPPRESSION D'UNE LIGNE))
 }
+
 
 //Chemin d'accès des images couleur
 void chemin_image_coul(){
@@ -337,9 +329,8 @@ void chemin_image_coul(){
   scanf("%s", ch_img_coul);
   strcpy(commande, "sed -i '10s#.*#");
   strcat(commande, ch_img_coul);
-  strcat(commande,"#' Param/param_indexation.txt");
+  strcat(commande,"#' Param/param_indexation");
   system(commande);
-  //ATTENTION A LA GESTION DE LA TAILLE DU CHEMIN (SI TROP GRAND ET SAUTE UNE LIGNE (SUPPRESSION D'UNE LIGNE))
 }
 
 //Menu modification chemins (choix entre texte, image noir et blanc, image couleur)

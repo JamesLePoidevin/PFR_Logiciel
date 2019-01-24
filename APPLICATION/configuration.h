@@ -5,7 +5,7 @@
 #include "menuUser.h"
 
 //FONCTIONS POUR VERIFIER LES TYPES
-int test_pourcentage();
+float test_pourcentage();
 
 //VISUALISER LES DESCRIPTEURS
 //Textes

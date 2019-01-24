@@ -81,10 +81,13 @@ void Indexation(){
   			}
   			p = emPILERGB(p, RGB);
   		}else{
+        tab2[0]=0;
+        tab2[1]=0;
   			lecture_image(ptr_img,ligne,colonne,tab2);
   			NB.ref = ref;
-  			NB.tab[0]=tab2[0];
-  			NB.tab[1]=tab2[1];
+  			NB.tab[0]=(tab2[0]/(ligne*colonne))*100;
+  			NB.tab[1]=(tab2[1]/(ligne*colonne))*100;
+  
   			pNB = emPILENB(pNB,NB);
   		}
   		fclose(ptr_img);

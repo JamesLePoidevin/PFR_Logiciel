@@ -148,7 +148,7 @@ void Recherche_extrait()
 
   if(atoi(mot_cle) == 0) //Si la saisie n'est pas un nombre (sauf 0), on fait la suite de la recherche
   {
-    if(mot_cle[0] != '0') //Si la saisie était 0 on n'a pas besoin de faire la recherche car on doit quitter.
+    if(mot_cle[0] != '0' && !strchr(mot_cle,'.') && !strchr(mot_cle,'*') && !strchr(mot_cle,'$') && !strchr(mot_cle,'\\')) //Si la saisie était 0 on n'a pas besoin de faire la recherche car on doit quitter.
     {
     //On récupère dans le fichier temporaire resultat.temp tous les mots contenant la saisie de l'utilisateur.
     strcpy(recherche, "grep -i ");
@@ -181,7 +181,7 @@ void Recherche_mot_exact()
 
   if(atoi(mot_cle) == 0 || atoi(mot_cle) == 1)
   {
-    if (mot_cle[0] != '0' && mot_cle[0]!='1')
+    if (mot_cle[0] != '0' && mot_cle[0]!='1' && !strchr(mot_cle,'.') && !strchr(mot_cle,'*') && !strchr(mot_cle,'$') && !strchr(mot_cle,'\\'))
     {
 
       //On regarde dans la liste des mots cles sans leurs descripteurs les lignes correspondants exactement à la recherche en récupérant aussi leur numéro de ligne.

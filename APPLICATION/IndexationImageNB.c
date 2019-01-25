@@ -1,26 +1,42 @@
+////////////////////////////////////////////////////////////////////////////
+//Auteur : Amaia Camino 	                                              //
+//                                                                        //
+//Indexation IMAGE (NB)                                                   //
+//Description: Fichier Pour l'indexation image noir et blanc    	  //
+// 																		  //
+//                                                                        //
+////////////////////////////////////////////////////////////////////////////
+
 #include "IndexationImageNB.h"
 
 char CHEMIN_NB [100] =  "../TEST_NB/";
 
-//fonction lecture fichier
+/**
+ * lit un fichier deja ouvert dans un pointeur et compte le nombre de pixel
+ * blanc et noir.
+ */
 void lecture_image(FILE* ptr_fil,int ligne,int colonne,float tab[2]){
 	int x;
+
+	//Si le fichier est bien ouvert
 	if(ptr_fil!=NULL){
+	
+		//
 		while(fscanf(ptr_fil,"%d",&x)==1){
-			if (x==0)
-			{
+			if (x==0){
 				tab[0]+=1;
 			}else
 			tab[1]+=1;
 		}
-		printf("tab0= %f  tab1= %f \n", tab[0], tab[1]);
-		//tab[0]=tab[0];
-		//tab[1]=tab[1]/(ligne*colonne))*100;
 	}
 }
 
 
-
+/**
+ * Lit les fichiers et place le resultat dans le fichier fichier
+ * @param adresseDeBase   adresse du dossier
+ * @param fichierDArriver Fichier d'arriver pour les reultats
+ */
 void listeDeFichiers1(char *adresseDeBase,char *fichierDArriver){
 	char commande[1024];
 	strcpy(commande, "ls -l ");
@@ -28,7 +44,6 @@ void listeDeFichiers1(char *adresseDeBase,char *fichierDArriver){
 	strcat(commande, " >");
 	strcat(commande, fichierDArriver);
 	system(commande);
-	printf("%s\n", 	commande);
 }
 
 char* cheminImage(){
@@ -128,10 +143,4 @@ int NomDesFichiers1(char *CHEMIN){
 	free(camino);
 	free(nomfic);
 }*/
-/*
-int main(int argc, char const *argv[])
-{
-	indexationCompleteNB();
-	system("gedit ../Source/FILES/DescripteurImageNB &");
-	return 0;
-}*/
+

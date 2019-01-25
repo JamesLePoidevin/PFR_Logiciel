@@ -1,3 +1,12 @@
+////////////////////////////////////////////////////////////////////////////
+//Auteur : James Le Poidevin                                              //
+//                                                                        //
+//Indexation Texte                                                        //
+//Description: Fichier Pour les fonction en rapport avec les Descripteur  //
+//Texte                                                                   //
+//                                                                        //
+////////////////////////////////////////////////////////////////////////////
+
 #include "Descripteur.h"
 
 /**

@@ -1,6 +1,17 @@
+///////////////////////////////////////////////////////////////////////
+//Auteur : Lila David                                                //
+//                                                                   //
+//Configuration des fichier de configuration                         //
+//Description:                                                       //
+//                                                                   //
+///////////////////////////////////////////////////////////////////////
+
 #include "configuration.h"
 
-
+/**
+ * Verifier si y a bien 
+ * @return [description]
+ */
 float test_pourcentage(){      // cas où on souhaite un entier ou un float
   char nombre[50] = "";
   int num = 0;

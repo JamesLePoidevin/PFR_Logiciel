@@ -1,3 +1,12 @@
+////////////////////////////////////////////////////////////////////////////
+//Auteur : Amaia Camino 	                                              //
+//                                                                        //
+//Indexation IMAGE (NB)                                                   //
+//Description: Fichier fait en cours  pour utliser dans la pile, un    	  //   
+// Element dans notre cas est descripteur de d'image NB 				  //
+//                                                                        //
+////////////////////////////////////////////////////////////////////////////
+
 #include <stdio.h>
 #include "elementNB.h"
 

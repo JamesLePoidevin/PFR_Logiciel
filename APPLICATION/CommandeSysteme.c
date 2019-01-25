@@ -1,3 +1,12 @@
+///////////////////////////////////////////////////////////////////////
+//Auteur : James Le Poidevin										 //
+//																	 //
+//Indexation Texte													 //
+//Description: Fichier avec les fonctions systeme pour faire faire   //
+//appelle a des notions UNIX.										 //
+//																	 //
+///////////////////////////////////////////////////////////////////////
+
 #include "CommandeSysteme.h"
 
 /**

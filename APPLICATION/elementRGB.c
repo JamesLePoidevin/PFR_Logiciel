@@ -1,3 +1,12 @@
+////////////////////////////////////////////////////////////////////////////
+//Auteur : Amaia Camino 	                                              //
+//                                                                        //
+//Indexation IMAGE (RGB)                                                  //
+//Description: Fichier fait en cours  pour utliser dans la pile, un    	  //
+// Element dans notre cas est descripteur de d'image RGB 				  //
+//                                                                        //
+////////////////////////////////////////////////////////////////////////////
+
 #include <stdio.h>
 #include "elementRGB.h"
 

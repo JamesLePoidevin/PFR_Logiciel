@@ -1,6 +1,19 @@
+//////////////////////////////////////////////////////////////////
+//Auteur : James Le Poidevin									//
+//																//
+//Comparaison Image 											//
+//Description: Fichier principale pour la comparaison d'image   //
+//																//
+//////////////////////////////////////////////////////////////////
+
 #include "comparaisonImage.h"
 
-int test_entier(){      // cas où on souhaite un entier ou un float
+
+/**
+ * Tester qu'on rentre pas un mauvaise valeur quand on demande un entier
+ * @return l'entier choisi
+ */
+int test_entier(){
 	char nombre[50] = "";
 	int num = 0;
 	char zero[] = "0";
@@ -33,6 +46,11 @@ int lirepourcentage(){
 
 }
 
+
+/**
+ * Lit le seuil pour minimum pour affichier un texte RGB
+ * @return le seuil
+ */
 int lirepourcentageRGB(){
 	int pourcentage_RGB;
 
@@ -157,6 +175,8 @@ int calculeSimilitudeNB(PILENB P1,type_resultat* res,type_descNB A){
 
 	//type_descNB 
 	type_descNB AUX;
+
+	//Tant qu la pile n'est pas vide
 	while(PILE_estVideNB(P1) !=1){
 		P1 = dePILENB(P1,&AUX);
 		res[ind].id = AUX.ref;
@@ -166,7 +186,10 @@ int calculeSimilitudeNB(PILENB P1,type_resultat* res,type_descNB A){
 	return ind;
 }
 
-
+/**
+ * Ouverture d'un image NB avec feh
+ * @param nom le tire du fichier a ouvertir
+ */
 void ouvrirImageNB(char * nom){
 	char nomFic[50];
 	char chemin[150];
@@ -184,6 +207,10 @@ void ouvrirImageNB(char * nom){
 	system(chemin);
 }
 
+/**
+ * Ouverture d'un image RGB avec feh
+ * @param nom le tire du fichier a ouvertir
+ */
 void ouvrirImageRGB(char * nom){
 	char nomFic[50];
 	char chemin[150];
@@ -218,6 +245,7 @@ void compair(int choix){
 
 fclose(ptr_NomDesFichiers);
 
+//Déclaration des variable
 FILE *ptrImageNB;
 FILE *ptrImageRGB;
 
@@ -311,7 +339,7 @@ if(NB == 1){	//si le fichier a comparer est Noir et blance
 		//lit le choix de l'utilisateur
 				boolean = test_entier();
 
-			}while(boolean < 0 || boolean > 6);
+			}while(boolean < 0 || boolean > in);
 			if(boolean != 0){
 
 			//affichage du texte choisi
@@ -429,10 +457,10 @@ do{
 
 		boolean = test_entier();
 
-	}while(boolean < 0 || boolean > 6);
+	}while(boolean < 0 || boolean > in);
 	if(boolean != 0){
 
-			//affichage du texte choisi
+		//affichage du texte choisi
 		int choix1;
 
 		for (int i = 0; i < indice-1; i++){

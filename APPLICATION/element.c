@@ -1,3 +1,13 @@
+////////////////////////////////////////////////////////////////////////////
+//Auteur : James Le Poideivn                                              //
+//                                                                        //
+//Indexation TEXTE                                                        //
+//Description: Fichier fait en cours  pour utliser dans la pile, un    	  //   
+// Element dans notre cas est descripteur de TEXTE 						  //
+//                                                                        //
+////////////////////////////////////////////////////////////////////////////
+
+
 #include <stdio.h>
 #include "element.h"
 
@@ -16,15 +26,7 @@ ELEMENT affect_ELEMENT(ELEMENT f,type_des a)
 	return f;
 }
 
-/*ELEMENT saisir_ELEMENT(ELEMENT f)
-{
-	float a;
-	printf("Veuiller saisir un element\n");
-	scanf("%f",&a);
-	f=affect_ELEMENT(f,a);
-	return f;
-}
-*/
+
 int compare_ELEMENT(ELEMENT f1,ELEMENT f2)
 {
 	if (f1.ref==f2.ref){

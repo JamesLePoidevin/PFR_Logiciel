@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////
-//Auteur : James Le Poidevin									//
+//Auteur : Amaia Camino & James Le Poidevin 					//
 //																//
 //Comparaison Image 											//
 //Description: Fichier principale pour la comparaison d'image   //

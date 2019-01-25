@@ -2,5 +2,5 @@ Seuil pour la recherche par comparaison de textes: (en %)
 72.000000
 Seuil pour la recherche par comparaison d'images en noir et blanc: (en %)
 93.000000
-Seuil pour la recherche par comparaison d'images couleur: (en %)
-93.000000
+Seuil pour la recherche par comparaison d'images couleur : (nombre entier, ordre de grandeur: entre 20000 et 30000)
+25000.000000

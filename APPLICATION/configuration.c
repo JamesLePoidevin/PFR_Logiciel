@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////
 //Auteur : Lila David                                                //
 //                                                                   //
-//Configuration des fichier de configuration                         //
+//Configuration des fichiers de configuration                         //
 //Description:                                                       //
 //                                                                   //
 ///////////////////////////////////////////////////////////////////////
@@ -170,7 +170,7 @@ void param_compar_img_coul(){
   char seuil_compar_img_coul_char[50];
   float seuil_compar_img_coul;
   do {
-    printf("Quel seuil de similarité voulez-vous pour la comparaison d'images en couleur? (en pourcentage)\n");
+    printf("Quel seuil de similarité voulez-vous pour la comparaison d'images en couleur? (nombre entier, ordre de grandeur : entre 20000 et 30000)\n");
     seuil_compar_img_coul = test_int();
     sprintf(seuil_compar_img_coul_char,"%f",seuil_compar_img_coul);
     if (seuil_compar_img_coul<=0){
